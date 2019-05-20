@@ -1,3 +1,7 @@
+## [0.1.5] - Added example directory
+
+## [0.1.4] - Minor fixes in pubspec.yaml
+
 ## [0.1.3] - License added.
 
 * Licensing info is under `LICENSE`

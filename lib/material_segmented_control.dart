@@ -2,20 +2,13 @@ library material_segmented_control;
 
 import 'package:flutter/material.dart';
 
-enum SegmentDirection {
-
-  Left,
-  Right,
-  Center,
-  None
-}
+enum SegmentDirection { Left, Right, Center, None }
 
 typedef SegmentChosen = void Function(SegmentDirection direction);
 
 /// Use this class to get a segmented control widget with the look
 /// and feel of Material design.
 class MaterialSegmentedControl extends StatefulWidget {
-
   /// The left widget
   final Widget leftWidget;
 
@@ -42,13 +35,13 @@ class MaterialSegmentedControl extends StatefulWidget {
 
   MaterialSegmentedControl(
       {this.leftWidget,
-        this.rightWidget,
-        this.onSelected,
-        this.reselectable = false,
-        this.colorSelected = Colors.blueAccent,
-        this.colorUnselected = Colors.black54,
-        this.height = 44.0,
-        this.borderRadius = 32.0});
+      this.rightWidget,
+      this.onSelected,
+      this.reselectable = false,
+      this.colorSelected = Colors.blueAccent,
+      this.colorUnselected = Colors.black54,
+      this.height = 44.0,
+      this.borderRadius = 32.0});
 
   @override
   _MaterialSegmentedControlState createState() =>
@@ -64,10 +57,10 @@ class _MaterialSegmentedControlState extends State<MaterialSegmentedControl> {
       height: widget.height,
       padding: MediaQuery.of(context)
           .removePadding(
-          removeTop: true,
-          removeBottom: true,
-          removeRight: true,
-          removeLeft: true)
+              removeTop: true,
+              removeBottom: true,
+              removeRight: true,
+              removeLeft: true)
           .padding,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(widget.borderRadius),
@@ -84,9 +77,9 @@ class _MaterialSegmentedControlState extends State<MaterialSegmentedControl> {
             padding: EdgeInsets.zero,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(widget.borderRadius),
-                  bottomLeft: Radius.circular(widget.borderRadius),
-                )),
+              topLeft: Radius.circular(widget.borderRadius),
+              bottomLeft: Radius.circular(widget.borderRadius),
+            )),
             child: widget.leftWidget,
             onPressed: () {
               if (currentDirectionSelected != SegmentDirection.Left ||
@@ -107,9 +100,9 @@ class _MaterialSegmentedControlState extends State<MaterialSegmentedControl> {
             padding: EdgeInsets.zero,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(widget.borderRadius),
-                  topRight: Radius.circular(widget.borderRadius),
-                )),
+              bottomRight: Radius.circular(widget.borderRadius),
+              topRight: Radius.circular(widget.borderRadius),
+            )),
             child: widget.rightWidget,
             onPressed: () {
               if (currentDirectionSelected != SegmentDirection.Right ||
