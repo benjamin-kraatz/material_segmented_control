@@ -28,35 +28,24 @@ dependencies:
 
 Wherever you want to use this widget, import
 
-`import 'package:/material_segmented_control/material_segmented_control.dart';`
+`import 'package:material_segmented_control/material_segmented_control.dart';`
 
 
 ### Basic usage
 
 `
+
 MaterialSegmentedControl(
-
         borderRadius: 32.0,
-
         reselectable: false,
-
         colorSelected: Colors.blueAccent,
-
         colorUnselected: Colors.white,
-
         leftWidget: Icon(Icons.camera_rear, color: Colors.black),
-
         rightWidget: Icon(Icons.camera_front, color: Colors.black),
-
         onSelected: (direction) {
-
           switch(direction)
-
           {
-
             // ...
-
           }
-
         })
 `
