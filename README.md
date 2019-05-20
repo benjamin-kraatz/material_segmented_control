@@ -18,23 +18,24 @@ You can check it out on pub:
 
 In your pubspec.yaml, add
 
-`
+```dart
 dependencies: 
     material_segmented_control: ^0.1.1
-`
+```
 
 
 ### Import code
 
 Wherever you want to use this widget, import
 
-`import 'package:material_segmented_control/material_segmented_control.dart';`
+```dart
+import 'package:material_segmented_control/material_segmented_control.dart';
+```
 
 
 ### Basic usage
 
-`
-
+```dart
 MaterialSegmentedControl(
         borderRadius: 32.0,
         reselectable: false,
@@ -48,4 +49,4 @@ MaterialSegmentedControl(
             // ...
           }
         })
-        `
+```
