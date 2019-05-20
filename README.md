@@ -19,7 +19,7 @@ You can check it out on pub:
 In your pubspec.yaml, add
 
 `
-dependencies:
+dependencies: 
     material_segmented_control: ^0.1.1
 `
 
@@ -36,11 +36,8 @@ Wherever you want to use this widget, import
 `
 
 MaterialSegmentedControl(
-
         borderRadius: 32.0,
-
         reselectable: false,
-
         colorSelected: Colors.blueAccent,
         colorUnselected: Colors.white,
         leftWidget: Icon(Icons.camera_rear, color: Colors.black),
