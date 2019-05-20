@@ -35,8 +35,11 @@ Wherever you want to use this widget, import
 
 `
 MaterialSegmentedControl(
+
         borderRadius: 32.0,
+
         reselectable: false,
+
         colorSelected: Colors.blueAccent,
         colorUnselected: Colors.white,
         leftWidget: Icon(Icons.camera_rear, color: Colors.black),
