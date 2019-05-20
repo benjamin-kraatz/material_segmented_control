@@ -1,3 +1,5 @@
+## [0.1.6] - Completed/fixed example directory
+
 ## [0.1.5] - Added example directory
 
 ## [0.1.4] - Minor fixes in pubspec.yaml

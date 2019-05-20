@@ -1,9 +1,8 @@
-name: material_segmented_control
-description: A segmented control widget like the one for iOS, but in Material design
-version: 0.1.6
+name: matseco_sample
+description: Showcases the use of Material Segmented Control widget
+version: 1.0.0
 author: The.BENN<beagle-barks-contact@yahoo.com>
 homepage: https://github.com/beagle-barks/material_segmented_control
-documentation:
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -11,6 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  material_segmented_control:
+    path: '..'
 
 dev_dependencies:
   flutter_test:
