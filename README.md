@@ -34,7 +34,6 @@ Wherever you want to use this widget, import
 ### Basic usage
 
 `
-
 MaterialSegmentedControl(
         borderRadius: 32.0,
         reselectable: false,
@@ -48,4 +47,4 @@ MaterialSegmentedControl(
             // ...
           }
         })
-`
+        `
