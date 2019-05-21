@@ -1,3 +1,8 @@
+## [0.2.0] - Customization of vertical divider
+
+* Customize color
+* Set width
+
 ## [0.1.6] - Completed/fixed example directory
 
 ## [0.1.5] - Added example directory

@@ -24,6 +24,12 @@ class MaterialSegmentedControl extends StatefulWidget {
   /// Border radius for the whole widget
   final double borderRadius;
 
+  /// Width of the centered divider
+  final double dividerWidth;
+
+  /// Color of the centered divider
+  final Color dividerColor;
+
   /// Selected segment background color
   final Color colorSelected;
 
@@ -41,6 +47,8 @@ class MaterialSegmentedControl extends StatefulWidget {
       this.colorSelected = Colors.blueAccent,
       this.colorUnselected = Colors.black54,
       this.height = 44.0,
+      this.dividerWidth = 1.0,
+      this.dividerColor = Colors.white,
       this.borderRadius = 32.0});
 
   @override
@@ -91,7 +99,8 @@ class _MaterialSegmentedControlState extends State<MaterialSegmentedControl> {
             },
           ),
           VerticalDivider(
-            width: 2.0,
+            width: widget.dividerWidth,
+            color: widget.dividerColor,
           ),
           FlatButton(
             color: currentDirectionSelected == SegmentDirection.Right
