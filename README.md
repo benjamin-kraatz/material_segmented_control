@@ -22,7 +22,7 @@ In your pubspec.yaml, add
 
 ```dart
 dependencies: 
-    material_segmented_control: ^0.1.1
+    material_segmented_control: ^0.2.0
 ```
 
 
@@ -50,5 +50,5 @@ MaterialSegmentedControl(
           {
             // ...
           }
-        })
+        });
 ```

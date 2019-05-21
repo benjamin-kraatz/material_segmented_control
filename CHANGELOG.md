@@ -1,3 +1,5 @@
+## [0.2.1] - Minor fixes
+
 ## [0.2.0] - Customization of vertical divider
 
 * Customize color
