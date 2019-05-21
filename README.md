@@ -2,6 +2,8 @@
 
 A material segmented control like the one for iOS, in Material style
 
+![alt text](https://github.com/beagle-barks/material_segmented_control/blob/master/images/msc.png "Preview")
+
 ## Why?
 
 We all know well the Cupertino segmented widget in [Flutter](https://flutter.dev).
