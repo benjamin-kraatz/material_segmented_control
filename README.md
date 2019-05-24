@@ -4,6 +4,10 @@ A material segmented control like the one for iOS, in Material style
 
 ![alt text](https://github.com/beagle-barks/material_segmented_control/blob/master/images/msc.png "Preview")
 
+
+*For important notes and TODOs, see TODO section below!*
+
+
 ## Why?
 
 We all know well the Cupertino segmented widget in [Flutter](https://flutter.dev).
@@ -52,3 +56,7 @@ MaterialSegmentedControl(
           }
         });
 ```
+
+### TODO
+
+I'm currently implementing that you do not only have two (left right) widgets, but a list of children. Check it out on *v-1-0-x* branch until it's ready for master.
