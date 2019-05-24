@@ -78,4 +78,4 @@ a) Provide a vertical divider between each item
 
 ### Known issues
 
--> Pixel overflow when the width of the whole control is larger than screen size. [WIP]
+-> Pixel overflow when the width of the whole control is larger than screen size. [WIP, see branch *multi-overflow-fix* for progress]
