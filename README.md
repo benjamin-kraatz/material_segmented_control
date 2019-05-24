@@ -41,30 +41,37 @@ import 'package:material_segmented_control/material_segmented_control.dart';
 
 ```dart
 MaterialSegmentedControl(
-          borderRadius: 32.0,
-          children: <SegmentedItem>[
-            SegmentedItem(
-              colorSelected: Colors.blueAccent,
-              colorIdle: Colors.transparent,
-              child: Icon(Icons.camera_rear, color: Colors.black),
-            ),
-            SegmentedItem(
-              colorSelected: Colors.blueAccent,
-              colorIdle: Colors.transparent,
-              child: Icon(Icons.wb_sunny, color: Colors.black),
-            ),
-            SegmentedItem(
-              colorSelected: Colors.blueAccent,
-              colorIdle: Colors.transparent,
-              child: Icon(Icons.description, color: Colors.black),
-            ),
-            SegmentedItem(
-              colorSelected: Colors.blueAccent,
-              colorIdle: Colors.transparent,
-              child: Icon(Icons.camera_front, color: Colors.black),
-            ),
-          ],
-        );
+              reselectable: false,
+              borderRadius: 32.0,
+              children: <SegmentedItem>[
+                SegmentedItem(
+                  colorSelected: Colors.blueAccent,
+                  colorIdle: Colors.transparent,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Rome'),
+                  ),
+                  onSelected: (state) {
+                    print('Hello, its rome ${state ? '' : 'un'}selected');
+                  },
+                ),
+                SegmentedItem(
+                  colorSelected: Colors.blueAccent,
+                  colorIdle: Colors.transparent,
+                  child: Text('New York'),
+                ),
+                SegmentedItem(
+                  colorSelected: Colors.blueAccent,
+                  colorIdle: Colors.transparent,
+                  child: Text('Washington'),
+                ),
+                SegmentedItem(
+                  colorSelected: Colors.blueAccent,
+                  colorIdle: Colors.transparent,
+                  child: Text('Berlin'),
+                ),
+              ],
+            );
 ```
 
 It is then ready to use
