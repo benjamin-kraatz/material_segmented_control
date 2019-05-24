@@ -1,3 +1,5 @@
+## [1.0.2] - Edited example readme
+
 ## [1.0.1] - Minor fixes on readme
 
 ## [1.0.0] - Added a list of children
