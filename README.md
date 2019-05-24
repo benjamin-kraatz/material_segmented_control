@@ -4,6 +4,8 @@ A material segmented control like the one for iOS, in Material style
 
 ![alt text](https://github.com/beagle-barks/material_segmented_control/blob/master/images/msc.png "Preview")
 
+To see TODOs, upcoming features and known issues, see "In the future" section
+
 ## Why?
 
 We all know well the Cupertino segmented widget in [Flutter](https://flutter.dev).
@@ -22,7 +24,7 @@ In your pubspec.yaml, add
 
 ```dart
 dependencies: 
-    material_segmented_control: ^0.2.0
+    material_segmented_control: ^1.0.0
 ```
 
 
@@ -39,16 +41,35 @@ import 'package:material_segmented_control/material_segmented_control.dart';
 
 ```dart
 MaterialSegmentedControl(
-        borderRadius: 32.0,
-        reselectable: false,
-        colorSelected: Colors.blueAccent,
-        colorUnselected: Colors.white,
-        leftWidget: Icon(Icons.camera_rear, color: Colors.black),
-        rightWidget: Icon(Icons.camera_front, color: Colors.black),
-        onSelected: (direction) {
-          switch(direction)
-          {
-            // ...
-          }
-        });
+          borderRadius: 32.0,
+          children: <SegmentedItem>[
+            SegmentedItem(
+              colorSelected: Colors.blueAccent,
+              colorIdle: Colors.transparent,
+              child: Icon(Icons.camera_rear, color: Colors.black),
+            ),
+            SegmentedItem(
+              colorSelected: Colors.blueAccent,
+              colorIdle: Colors.transparent,
+              child: Icon(Icons.wb_sunny, color: Colors.black),
+            ),
+            SegmentedItem(
+              colorSelected: Colors.blueAccent,
+              colorIdle: Colors.transparent,
+              child: Icon(Icons.description, color: Colors.black),
+            ),
+            SegmentedItem(
+              colorSelected: Colors.blueAccent,
+              colorIdle: Colors.transparent,
+              child: Icon(Icons.camera_front, color: Colors.black),
+            ),
+          ],
+        );
 ```
+
+
+## In the future
+
+### TODO
+
+a) Provide a vertical divider between each item

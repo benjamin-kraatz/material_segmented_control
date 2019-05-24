@@ -1,3 +1,10 @@
+## [1.0.0] - Added a list of children
+
+* Updated to Dart SDK version 2.2.2 !
+* Provide the segmented control a list of children instead only left and right
+* Define selection callback for each item itself
+* Set colors for each item
+
 ## [0.2.1] - Minor fixes
 
 ## [0.2.0] - Customization of vertical divider
