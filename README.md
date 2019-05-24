@@ -73,7 +73,8 @@ It is then ready to use
 
 ### TODO
 
-a) Provide a vertical divider between each item
+a) If you don't want do define a selection and idle color for each item but general colors, set them in MSC (almost done, friends!)
+b) Provide a vertical divider between each item
 
 
 ### Known issues
