@@ -65,7 +65,7 @@ class _SegmentedItemState extends State<SegmentedItem>
         topRight: Radius.circular(_getRadiusLast()),
         bottomRight: Radius.circular(_getRadiusLast()),
       )),
-      child: widget.child,
+      child: widget.child == null ? Container() : widget.child,
       onPressed: () {
         if (!_canSelect && _isSelected) return;
         _toggleSelection();
