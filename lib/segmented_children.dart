@@ -15,6 +15,8 @@ typedef SegmentChosen = void Function(bool);
 /// These properties have no default value and must be set.
 ///
 /// To execute code on selecting an item, define [onSelected]. Nothing is done if it is [Null]
+///
+/// A [child] must also be set.
 class SegmentedItem extends StatefulWidget {
   /// Selected color
   final Color colorSelected;
@@ -29,7 +31,10 @@ class SegmentedItem extends StatefulWidget {
   final Widget child;
 
   SegmentedItem(
-      {this.colorSelected, this.colorIdle, this.onSelected, this.child});
+      {@required this.colorSelected,
+      @required this.colorIdle,
+      @required this.child,
+      this.onSelected});
 
   final SegmentedLocatorMixin _state = _SegmentedItemState();
 
