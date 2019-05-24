@@ -2,17 +2,26 @@ library material_segmented_control;
 
 import 'package:flutter/material.dart';
 
+import 'segmented_children.dart';
+import 'segmented_item_settings.dart';
+
+@Deprecated(
+    'This is replaced by the list of children. It has no effect and will be removed on later versions.')
 enum SegmentDirection { Left, Right, Center, None }
 
+@Deprecated(
+    "Has no effect. Is replaced by the child's listener. Will be removed on later versions")
 typedef SegmentChosen = void Function(SegmentDirection direction);
 
 /// Use this class to get a segmented control widget with the look
 /// and feel of Material design.
 class MaterialSegmentedControl extends StatefulWidget {
   /// The left widget
+  @Deprecated('This is replaced by a list of children')
   final Widget leftWidget;
 
   /// The right widget
+  @Deprecated('This is replaced by a list of children')
   final Widget rightWidget;
 
   /// Callback method when a segment was tapped/clicked
@@ -31,21 +40,34 @@ class MaterialSegmentedControl extends StatefulWidget {
   final Color dividerColor;
 
   /// Selected segment background color
+  @Deprecated(
+      "Replaced by child's value and will be removed with later versions")
   final Color colorSelected;
 
   /// Unselected segment background color
+  @Deprecated(
+      "Replaced by child's value and will be removed with later versions")
   final Color colorUnselected;
 
   /// If a selected segment can be reselected
   final bool reselectable;
 
+  /// All the children inside. Left and right widget get rounded edges if [borderRadius] > 0
+  final List<SegmentedItem> children;
+
   MaterialSegmentedControl(
-      {this.leftWidget,
-      this.rightWidget,
-      this.onSelected,
+      {@Deprecated('This is replaced by a list of children. Use children<SegmentedItems>[] instead!')
+          this.leftWidget,
+      @Deprecated('This is replaced by a list of children. Use children<SegmentedItems>[] instead!')
+          this.rightWidget,
+      @Deprecated('This has no effect and will be removed in future versions')
+          this.onSelected,
+      this.children,
       this.reselectable = false,
-      this.colorSelected = Colors.blueAccent,
-      this.colorUnselected = Colors.black54,
+      @Deprecated("Replaced by child's value and will be removed")
+          this.colorSelected = Colors.blueAccent,
+      @Deprecated("Replaced by child's value and will be removed")
+          this.colorUnselected = Colors.black54,
       this.height = 44.0,
       this.dividerWidth = 1.0,
       this.dividerColor = Colors.white,
@@ -59,6 +81,8 @@ class MaterialSegmentedControl extends StatefulWidget {
 class _MaterialSegmentedControlState extends State<MaterialSegmentedControl> {
   SegmentDirection currentDirectionSelected = SegmentDirection.Center;
 
+  SegmentedItemSelectorWrapper _currentSelectedWidget =
+      SegmentedItemSelectorWrapper();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -78,58 +102,61 @@ class _MaterialSegmentedControlState extends State<MaterialSegmentedControl> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          FlatButton(
-            color: currentDirectionSelected == SegmentDirection.Left
-                ? widget.colorSelected
-                : widget.colorUnselected,
-            padding: EdgeInsets.zero,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(widget.borderRadius),
-              bottomLeft: Radius.circular(widget.borderRadius),
-            )),
-            child: widget.leftWidget,
-            onPressed: () {
-              if (currentDirectionSelected != SegmentDirection.Left ||
-                  currentDirectionSelected == SegmentDirection.Left &&
-                      widget.reselectable) {
-                _selectDirection(SegmentDirection.Left);
-                widget.onSelected(SegmentDirection.Left);
-              }
-            },
-          ),
-          VerticalDivider(
-            width: widget.dividerWidth,
-            color: widget.dividerColor,
-          ),
-          FlatButton(
-            color: currentDirectionSelected == SegmentDirection.Right
-                ? widget.colorSelected
-                : widget.colorUnselected,
-            padding: EdgeInsets.zero,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(widget.borderRadius),
-              topRight: Radius.circular(widget.borderRadius),
-            )),
-            child: widget.rightWidget,
-            onPressed: () {
-              if (currentDirectionSelected != SegmentDirection.Right ||
-                  currentDirectionSelected == SegmentDirection.Right &&
-                      widget.reselectable) {
-                _selectDirection(SegmentDirection.Right);
-                widget.onSelected(SegmentDirection.Right);
-              }
-            },
-          )
+          for (int i = 0; i < widget.children.length; i++)
+            if (i == widget.children.length - 1)
+              widget.children[i]
+                ..find.setup(SegmentedItemSettings(
+                    widget.borderRadius, _determineReSelectable(i)))
+                ..find.setLastItem()
+                ..find.listen((state) {
+                  _apply(state, i);
+                })
+            else
+              if (i == 0)
+                widget.children[0]
+                  ..find.setup(SegmentedItemSettings(
+                      widget.borderRadius, _determineReSelectable(i)))
+                  ..find.setFirstItem()
+                  ..find.listen((state) {
+                    _apply(state, i);
+                  })
+              else
+                widget.children[i]
+                  ..find.setup(SegmentedItemSettings(
+                      widget.borderRadius, _determineReSelectable(i)))
+                  ..find.listen((state) {
+                    _apply(state, i);
+                  }),
         ],
       ),
     );
   }
 
+  @Deprecated(
+      "This is replaced by children and will be removed in later versions")
   void _selectDirection(SegmentDirection direction) {
     setState(() {
       currentDirectionSelected = direction;
     });
+  }
+
+  void _apply(bool state, int index) {
+    _currentSelectedWidget = SegmentedItemSelectorWrapper(
+        itemSelected: widget.children[index], isSelected: state);
+    _determineSelection();
+    setState(() {});
+  }
+
+  bool _determineReSelectable(int index) {
+    return (widget.reselectable &&
+        _currentSelectedWidget.itemSelected == widget.children[index]);
+  }
+
+  _determineSelection() {
+    for (SegmentedItem s in widget.children) {
+      if (s != _currentSelectedWidget.itemSelected) {
+        s.find.setUnselected(true);
+      }
+    }
   }
 }
