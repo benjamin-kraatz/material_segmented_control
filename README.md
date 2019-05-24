@@ -78,11 +78,8 @@ MaterialSegmentedControl(
             );
 ```
 
-<<<<<<< HEAD
 ### TODO
 
-I'm currently implementing that you do not only have two (left right) widgets, but a list of children. Check it out on *v-1-0-x* branch until it's ready for master.
-=======
 It is then ready to use
 
 ## In the future
@@ -98,4 +95,3 @@ c) Animate color changes (almost done, friends!)
 ### Known issues
 
 -> Pixel overflow when the width of the whole control is larger than screen size. [WIP, see branch *multi-overflow-fix* for progress]
->>>>>>> v1-0-x
