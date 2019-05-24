@@ -3,13 +3,20 @@ import 'package:flutter/material.dart';
 import 'mixins/locator_mixin.dart';
 import 'segmented_item_settings.dart';
 
+/// Callback function when an item is selected and its state
 typedef SegmentChosen = void Function(bool);
 
 class SegmentedItem extends StatefulWidget {
+  /// Selected color
   final Color colorSelected;
+
+  /// Unselected color
   final Color colorIdle;
+
+  /// Callback field when an item is selected
   final SegmentChosen onSelected;
 
+  /// The item's content
   final Widget child;
 
   SegmentedItem(
