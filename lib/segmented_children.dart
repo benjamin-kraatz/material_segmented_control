@@ -17,7 +17,7 @@ class SegmentedItem extends StatefulWidget {
 
   final SegmentedLocatorMixin _state = _SegmentedItemState();
 
-  SegmentedLocatorMixin locate() => _state;
+  SegmentedLocatorMixin get find => _state;
 
   @override
   _SegmentedItemState createState() => _state;

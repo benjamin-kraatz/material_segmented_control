@@ -105,26 +105,26 @@ class _MaterialSegmentedControlState extends State<MaterialSegmentedControl> {
           for (int i = 0; i < widget.children.length; i++)
             if (i == widget.children.length - 1)
               widget.children[i]
-                ..locate().setup(SegmentedItemSettings(
+                ..find.setup(SegmentedItemSettings(
                     widget.borderRadius, _determineReSelectable(i)))
-                ..locate().setLastItem()
-                ..locate().listen((state) {
+                ..find.setLastItem()
+                ..find.listen((state) {
                   _apply(state, i);
                 })
             else
               if (i == 0)
                 widget.children[0]
-                  ..locate().setup(SegmentedItemSettings(
+                  ..find.setup(SegmentedItemSettings(
                       widget.borderRadius, _determineReSelectable(i)))
-                  ..locate().setFirstItem()
-                  ..locate().listen((state) {
+                  ..find.setFirstItem()
+                  ..find.listen((state) {
                     _apply(state, i);
                   })
               else
                 widget.children[i]
-                  ..locate().setup(SegmentedItemSettings(
+                  ..find.setup(SegmentedItemSettings(
                       widget.borderRadius, _determineReSelectable(i)))
-                  ..locate().listen((state) {
+                  ..find.listen((state) {
                     _apply(state, i);
                   }),
         ],
@@ -155,7 +155,7 @@ class _MaterialSegmentedControlState extends State<MaterialSegmentedControl> {
   _determineSelection() {
     for (SegmentedItem s in widget.children) {
       if (s != _currentSelectedWidget.itemSelected) {
-        s.locate()..setUnselected(true);
+        s.find.setUnselected(true);
       }
     }
   }
