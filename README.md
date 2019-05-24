@@ -2,7 +2,7 @@
 
 A material segmented control like the one for iOS, in Material style
 
-![alt text](https://github.com/beagle-barks/material_segmented_control/blob/master/images/msc.png "Preview")
+![alt text](https://github.com/beagle-barks/material_segmented_control/blob/master/images/msc_100.jpg "Preview")
 
 To see TODOs, upcoming features and known issues, see "In the future" section
 
@@ -52,7 +52,7 @@ MaterialSegmentedControl(
                     child: Text('Rome'),
                   ),
                   onSelected: (state) {
-                    print('Hello, its rome ${state ? '' : 'un'}selected');
+                    print('Hello, it's rome - ${state ? '' : 'un'}selected');
                   },
                 ),
                 SegmentedItem(
