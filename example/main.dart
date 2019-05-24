@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
+import 'package:material_segmented_control/segmented_children.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,6 +16,25 @@ class MyApp extends StatelessWidget {
             reselectable: false,
             colorSelected: Colors.blueAccent,
             colorUnselected: Colors.white,
+            children: <SegmentedItem>[
+              SegmentedItem(
+                colorSelected: Colors.blueGrey,
+                colorIdle: Colors.transparent,
+                child: Icon(Icons.camera_rear, color: Colors.black),
+                borderRadius: 32.0,
+              ),
+              SegmentedItem(
+                colorSelected: Colors.blueGrey,
+                colorIdle: Colors.transparent,
+                child: Icon(Icons.camera_rear, color: Colors.black),
+              ),
+              SegmentedItem(
+                colorSelected: Colors.blueGrey,
+                colorIdle: Colors.transparent,
+                child: Icon(Icons.camera_front, color: Colors.black),
+                borderRadius: 32.0,
+              ),
+            ],
             leftWidget: Icon(Icons.camera_rear, color: Colors.black),
             rightWidget: Icon(Icons.camera_front, color: Colors.black),
             onSelected: (direction) {

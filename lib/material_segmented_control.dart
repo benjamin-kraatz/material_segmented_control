@@ -2,8 +2,14 @@ library material_segmented_control;
 
 import 'package:flutter/material.dart';
 
+import 'segmented_children.dart';
+
+@Deprecated(
+    'This is replaced by the list of children. It has no effect and will be removed on later versions.')
 enum SegmentDirection { Left, Right, Center, None }
 
+@Deprecated(
+    "Has no effect. Is replaced by the child's listener. Will be removed on later versions")
 typedef SegmentChosen = void Function(SegmentDirection direction);
 
 /// Use this class to get a segmented control widget with the look
@@ -24,6 +30,7 @@ class MaterialSegmentedControl extends StatefulWidget {
   final double height;
 
   /// Border radius for the whole widget
+  @Deprecated("Replaced by child's value")
   final double borderRadius;
 
   /// Width of the centered divider
@@ -41,19 +48,25 @@ class MaterialSegmentedControl extends StatefulWidget {
   /// If a selected segment can be reselected
   final bool reselectable;
 
+  /// All the children inside. Left and right widget get rounded edges if [SegmentedItem.borderRadius] > 0
+  final List<SegmentedItem> children;
+
   MaterialSegmentedControl(
       {@Deprecated('This is replaced by a list of children. Use children<SegmentedItems>[] instead!')
           this.leftWidget,
       @Deprecated('This is replaced by a list of children. Use children<SegmentedItems>[] instead!')
           this.rightWidget,
-      this.onSelected,
+      @Deprecated('This has no effect and will be removed in future versions')
+          this.onSelected,
+      this.children,
       this.reselectable = false,
       this.colorSelected = Colors.blueAccent,
       this.colorUnselected = Colors.black54,
       this.height = 44.0,
       this.dividerWidth = 1.0,
       this.dividerColor = Colors.white,
-      this.borderRadius = 32.0});
+      @Deprecated("Replaced by child's value")
+          this.borderRadius = 32.0});
 
   @override
   _MaterialSegmentedControlState createState() =>
@@ -82,7 +95,12 @@ class _MaterialSegmentedControlState extends State<MaterialSegmentedControl> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          FlatButton(
+          for (int i = 0; i < widget.children.length; i++)
+            if (i == widget.children.length - 1)
+              widget.children[i]..locate().setLastItem()
+            else
+              if (i == 0) widget.children[0]..locate().setFirstItem(),
+          /*FlatButton(
             color: currentDirectionSelected == SegmentDirection.Left
                 ? widget.colorSelected
                 : widget.colorUnselected,
@@ -125,7 +143,7 @@ class _MaterialSegmentedControlState extends State<MaterialSegmentedControl> {
                 widget.onSelected(SegmentDirection.Right);
               }
             },
-          )
+          )*/
         ],
       ),
     );
