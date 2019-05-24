@@ -56,7 +56,7 @@ MaterialSegmentedControl(
                     child: Text('Rome'),
                   ),
                   onSelected: (state) {
-                    print('Hello, it's rome - ${state ? '' : 'un'}selected');
+                    print("Hello, it's rome - ${state ? '' : 'un'}selected");
                   },
                 ),
                 SegmentedItem(

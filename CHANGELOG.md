@@ -1,3 +1,5 @@
+## [1.0.1] - Minor fixes on readme
+
 ## [1.0.0] - Added a list of children
 
 * Updated to Dart SDK version 2.2.2 !
