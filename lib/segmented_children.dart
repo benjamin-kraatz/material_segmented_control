@@ -2,10 +2,19 @@ import 'package:flutter/material.dart';
 
 import 'mixins/locator_mixin.dart';
 import 'segmented_item_settings.dart';
+import 'material_segmented_control.dart';
 
 /// Callback function when an item is selected and its state
 typedef SegmentChosen = void Function(bool);
 
+/// A segmented item.
+/// Use this to show a segment inside [MaterialSegmentedControl].
+///
+/// [colorSelected] is shown if an item is selected and
+/// [colorIdle] is the background color for unselected item.
+/// These properties have no default value and must be set.
+///
+/// To execute code on selecting an item, define [onSelected]. Nothing is done if it is [Null]
 class SegmentedItem extends StatefulWidget {
   /// Selected color
   final Color colorSelected;
