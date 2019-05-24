@@ -78,8 +78,6 @@ MaterialSegmentedControl(
             );
 ```
 
-### TODO
-
 It is then ready to use
 
 ## In the future
