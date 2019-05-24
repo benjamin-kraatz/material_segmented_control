@@ -16,7 +16,7 @@ typedef SegmentChosen = void Function(bool);
 ///
 /// To execute code on selecting an item, define [onSelected]. Nothing is done if it is [Null]
 ///
-/// A [child] must also be set.
+/// A [child] must also be set. But if it is null, a Container is returned.
 class SegmentedItem extends StatefulWidget {
   /// Selected color
   final Color colorSelected;
