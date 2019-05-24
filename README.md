@@ -67,6 +67,7 @@ MaterialSegmentedControl(
         );
 ```
 
+It is then ready to use
 
 ## In the future
 
