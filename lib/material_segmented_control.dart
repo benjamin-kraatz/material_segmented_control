@@ -10,9 +10,11 @@ typedef SegmentChosen = void Function(SegmentDirection direction);
 /// and feel of Material design.
 class MaterialSegmentedControl extends StatefulWidget {
   /// The left widget
+  @Deprecated('This is replaced by a list of children')
   final Widget leftWidget;
 
   /// The right widget
+  @Deprecated('This is replaced by a list of children')
   final Widget rightWidget;
 
   /// Callback method when a segment was tapped/clicked
@@ -40,8 +42,10 @@ class MaterialSegmentedControl extends StatefulWidget {
   final bool reselectable;
 
   MaterialSegmentedControl(
-      {this.leftWidget,
-      this.rightWidget,
+      {@Deprecated('This is replaced by a list of children. Use children<SegmentedItems>[] instead!')
+          this.leftWidget,
+      @Deprecated('This is replaced by a list of children. Use children<SegmentedItems>[] instead!')
+          this.rightWidget,
       this.onSelected,
       this.reselectable = false,
       this.colorSelected = Colors.blueAccent,
