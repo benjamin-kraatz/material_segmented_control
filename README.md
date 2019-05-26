@@ -92,4 +92,6 @@ c) Animate color changes (almost done, friends!)
 
 ### Known issues
 
+-> Calling setState in `SegmentedItem`'s selection listener causes weird behaviour (you can select multiple items). This is an issue, cause you should only be able to mark ONLY ONE item as selected!
+
 -> Pixel overflow when the width of the whole control is larger than screen size. [WIP, see branch *multi-overflow-fix* for progress]
