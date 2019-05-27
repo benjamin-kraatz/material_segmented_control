@@ -2,7 +2,7 @@
 
 A material segmented control like the one for iOS, in Material style
 
-![image](https://github.com/beagle-barks/material_segmented_control/blob/master/images/msc_100.jpg "Preview")
+![image](https://github.com/beagle-barks/material_segmented_control/blob/master/images/msc_110.jpg "Preview")
 
 To see TODOs, upcoming features and known issues, see "In the future" section
 
@@ -28,7 +28,7 @@ In your pubspec.yaml, add
 
 ```dart
 dependencies: 
-    material_segmented_control: ^1.1.0
+    material_segmented_control: ^1.1.1
 ```
 
 

@@ -1,4 +1,8 @@
-## [1.1.0] - Edited example readme
+## [1.1.1] - Minor fixes
+
+* Optical improvements
+
+## [1.1.0] - Fixed major bug where you can select multiple items
 
 ## [1.0.2] - Edited example readme
 
