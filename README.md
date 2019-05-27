@@ -13,7 +13,7 @@ To see TODOs, upcoming features and known issues, see "In the future" section
 ## Why?
 
 We all know well the Cupertino segmented widget in [Flutter](https://flutter.dev).
-But there is no similar in Material, so I decided to publish it.
+But there is no similar in Material, so I thought, why not to create one.
 
 You can check it out on pub:
 ([see package on dartlang](http://pub.dartlang.org/packages/material_segmented_control))
@@ -78,8 +78,6 @@ MaterialSegmentedControl(
             );
 ```
 
-### TODO
-
 It is then ready to use
 
 ## In the future
@@ -93,5 +91,7 @@ b) Provide a vertical divider between each item
 c) Animate color changes (almost done, friends!)
 
 ### Known issues
+
+-> Calling setState in `SegmentedItem`'s selection listener causes weird behaviour (you can select multiple items). This is an issue, cause you should only be able to mark ONLY ONE item as selected!
 
 -> Pixel overflow when the width of the whole control is larger than screen size. [WIP, see branch *multi-overflow-fix* for progress]
