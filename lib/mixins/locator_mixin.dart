@@ -9,12 +9,9 @@ mixin SegmentedLocatorMixin {
   /// An item is the first item
   void setFirstItem();
 
+  /// An item is the first item
+  void setItemPosition(int index, int maxCount);
+
   /// Sets up an item with specified settings
   void setup(SegmentedItemSettings settings);
-
-  /// Adds a listener to an item
-  void listen(SegmentChosen listener);
-
-  /// Unselects an item based on whether it is allowed
-  void setUnselected(bool allow);
 }

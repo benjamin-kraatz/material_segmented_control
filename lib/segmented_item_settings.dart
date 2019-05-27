@@ -2,18 +2,17 @@ import 'segmented_children.dart';
 
 /// Holds information to set up a [SegmentedItem]
 class SegmentedItemSettings {
+  /// The current selected item
+  static SegmentedItem SelectedItem =
+      SegmentedItem(colorSelected: null, colorIdle: null, child: null);
+
   double _borderRadius;
-  bool _isSelectable;
 
   /// Define a border radius with [_borderRadius]
-  /// And if an item can be selected through [_isSelectable]
-  SegmentedItemSettings(this._borderRadius, this._isSelectable);
+  SegmentedItemSettings(this._borderRadius);
 
   /// Get the current [_borderRadius] setting
   double get borderRadius => _borderRadius;
-
-  /// Get the current [_isSelectable] setting
-  bool get isSelectable => _isSelectable;
 
   /// Sets the border radius to an instance of [SegmentedItemSettings]
   /// and returns it with set value
@@ -21,24 +20,23 @@ class SegmentedItemSettings {
     _borderRadius = radius;
     return this;
   }
-
-  /// Sets the selection state to an instance of [SegmentedItemSettings]
-  /// and returns it with set value
-  SegmentedItemSettings setReselectable(bool state) {
-    _isSelectable = state;
-    return this;
-  }
-
-  /// Singleton creator
-  static SegmentedItemSettings make() {
-    return SegmentedItemSettings(0, false);
-  }
 }
 
 /// Used to define the current selected item
 class SegmentedItemSelectorWrapper {
-  final SegmentedItem itemSelected;
-  final bool isSelected;
+  SegmentedItem selectedItem;
+  bool isSelected;
 
-  SegmentedItemSelectorWrapper({this.itemSelected, this.isSelected});
+  SegmentedItemSelectorWrapper({this.selectedItem, this.isSelected});
+
+  void setSelectedItem(SegmentedItem item) {
+    selectedItem = item;
+  }
+}
+
+/// Holding information about a public unique key
+class Identifier {
+  String ident;
+
+  Identifier(this.ident);
 }

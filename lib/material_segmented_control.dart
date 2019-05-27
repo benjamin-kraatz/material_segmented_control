@@ -5,31 +5,9 @@ import 'package:flutter/material.dart';
 import 'segmented_children.dart';
 import 'segmented_item_settings.dart';
 
-@Deprecated(
-    'This is replaced by the list of children. It has no effect and will be removed on later versions.')
-enum SegmentDirection { Left, Right, Center, None }
-
-@Deprecated(
-    "Has no effect. Is replaced by the child's listener. Will be removed on later versions")
-typedef SegmentChosen = void Function(SegmentDirection direction);
-
 /// Use this class to get a segmented control widget with the look
 /// and feel of Material design.
 class MaterialSegmentedControl extends StatefulWidget {
-  /// The left widget
-  @Deprecated('This is replaced by a list of children')
-  final Widget leftWidget;
-
-  /// The right widget
-  @Deprecated('This is replaced by a list of children')
-  final Widget rightWidget;
-
-  /// Callback method when a segment was tapped/clicked
-  final SegmentChosen onSelected;
-
-  /// The initial height of the widget
-  final double height;
-
   /// Border radius for the whole widget
   final double borderRadius;
 
@@ -39,16 +17,6 @@ class MaterialSegmentedControl extends StatefulWidget {
   /// Color of the centered divider
   final Color dividerColor;
 
-  /// Selected segment background color
-  @Deprecated(
-      "Replaced by child's value and will be removed with later versions")
-  final Color colorSelected;
-
-  /// Unselected segment background color
-  @Deprecated(
-      "Replaced by child's value and will be removed with later versions")
-  final Color colorUnselected;
-
   /// If a selected segment can be reselected
   final bool reselectable;
 
@@ -56,19 +24,8 @@ class MaterialSegmentedControl extends StatefulWidget {
   final List<SegmentedItem> children;
 
   MaterialSegmentedControl(
-      {@Deprecated('This is replaced by a list of children. Use children<SegmentedItems>[] instead!')
-          this.leftWidget,
-      @Deprecated('This is replaced by a list of children. Use children<SegmentedItems>[] instead!')
-          this.rightWidget,
-      @Deprecated('This has no effect and will be removed in future versions')
-          this.onSelected,
-      this.children,
+      {this.children,
       this.reselectable = false,
-      @Deprecated("Replaced by child's value and will be removed")
-          this.colorSelected = Colors.blueAccent,
-      @Deprecated("Replaced by child's value and will be removed")
-          this.colorUnselected = Colors.black54,
-      this.height = 44.0,
       this.dividerWidth = 1.0,
       this.dividerColor = Colors.white,
       this.borderRadius = 32.0});
@@ -79,14 +36,9 @@ class MaterialSegmentedControl extends StatefulWidget {
 }
 
 class _MaterialSegmentedControlState extends State<MaterialSegmentedControl> {
-  SegmentDirection currentDirectionSelected = SegmentDirection.Center;
-
-  SegmentedItemSelectorWrapper _currentSelectedWidget =
-      SegmentedItemSelectorWrapper();
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: widget.height,
       padding: MediaQuery.of(context)
           .removePadding(
               removeTop: true,
@@ -100,63 +52,14 @@ class _MaterialSegmentedControlState extends State<MaterialSegmentedControl> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          for (int i = 0; i < widget.children.length; i++)
-            if (i == widget.children.length - 1)
-              widget.children[i]
-                ..find.setup(SegmentedItemSettings(
-                    widget.borderRadius, _determineReSelectable(i)))
-                ..find.setLastItem()
-                ..find.listen((state) {
-                  _apply(state, i);
-                })
-            else
-              if (i == 0)
-                widget.children[0]
-                  ..find.setup(SegmentedItemSettings(
-                      widget.borderRadius, _determineReSelectable(i)))
-                  ..find.setFirstItem()
-                  ..find.listen((state) {
-                    _apply(state, i);
-                  })
-              else
-                widget.children[i]
-                  ..find.setup(SegmentedItemSettings(
-                      widget.borderRadius, _determineReSelectable(i)))
-                  ..find.listen((state) {
-                    _apply(state, i);
-                  }),
-        ],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: widget.children
+          ..forEach((el) => el
+            ..setKey(widget.children.indexOf(el).toString())
+            ..find.setItemPosition(
+                widget.children.indexOf(el), widget.children.length)
+            ..find.setup(SegmentedItemSettings(widget.borderRadius))),
       ),
     );
-  }
-
-  @Deprecated(
-      "This is replaced by children and will be removed in later versions")
-  void _selectDirection(SegmentDirection direction) {
-    setState(() {
-      currentDirectionSelected = direction;
-    });
-  }
-
-  void _apply(bool state, int index) {
-    _currentSelectedWidget = SegmentedItemSelectorWrapper(
-        itemSelected: widget.children[index], isSelected: state);
-    _determineSelection();
-    setState(() {});
-  }
-
-  bool _determineReSelectable(int index) {
-    return (widget.reselectable &&
-        _currentSelectedWidget.itemSelected == widget.children[index]);
-  }
-
-  _determineSelection() {
-    for (SegmentedItem s in widget.children) {
-      if (s != _currentSelectedWidget.itemSelected) {
-        s.find.setUnselected(true);
-      }
-    }
   }
 }
