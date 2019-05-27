@@ -1,3 +1,5 @@
+## [1.1.0] - Edited example readme
+
 ## [1.0.2] - Edited example readme
 
 ## [1.0.1] - Minor fixes on readme

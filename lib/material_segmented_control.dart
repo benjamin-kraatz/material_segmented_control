@@ -17,15 +17,11 @@ class MaterialSegmentedControl extends StatefulWidget {
   /// Color of the centered divider
   final Color dividerColor;
 
-  /// If a selected segment can be reselected
-  final bool reselectable;
-
   /// All the children inside. Left and right widget get rounded edges if [borderRadius] > 0
   final List<SegmentedItem> children;
 
   MaterialSegmentedControl(
       {this.children,
-      this.reselectable = false,
       this.dividerWidth = 1.0,
       this.dividerColor = Colors.white,
       this.borderRadius = 32.0});

@@ -13,26 +13,25 @@ class MyApp extends StatelessWidget {
       child: Center(
         child: MaterialSegmentedControl(
           borderRadius: 32.0,
-          reselectable: false,
           children: <SegmentedItem>[
             SegmentedItem(
-              colorSelected: Colors.blueGrey,
-              colorIdle: Colors.transparent,
+              colorSelected: Colors.lightBlueAccent,
+              colorIdle: Colors.white,
               child: Icon(Icons.camera_rear, color: Colors.black),
             ),
             SegmentedItem(
-              colorSelected: Colors.blueGrey,
-              colorIdle: Colors.transparent,
+              colorSelected: Colors.lightBlueAccent,
+              colorIdle: Colors.white,
               child: Icon(Icons.wb_sunny, color: Colors.black),
             ),
             SegmentedItem(
-              colorSelected: Colors.blueGrey,
-              colorIdle: Colors.transparent,
+              colorSelected: Colors.lightBlueAccent,
+              colorIdle: Colors.white,
               child: Icon(Icons.description, color: Colors.black),
             ),
             SegmentedItem(
-              colorSelected: Colors.blueGrey,
-              colorIdle: Colors.transparent,
+              colorSelected: Colors.lightBlueAccent,
+              colorIdle: Colors.white,
               child: Icon(Icons.camera_front, color: Colors.black),
             ),
           ],

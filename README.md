@@ -2,7 +2,7 @@
 
 A material segmented control like the one for iOS, in Material style
 
-![alt text](https://github.com/beagle-barks/material_segmented_control/blob/master/images/msc_100.jpg "Preview")
+![image](https://github.com/beagle-barks/material_segmented_control/blob/master/images/msc_100.jpg "Preview")
 
 To see TODOs, upcoming features and known issues, see "In the future" section
 
@@ -16,7 +16,7 @@ We all know well the Cupertino segmented widget in [Flutter](https://flutter.dev
 But there is no similar in Material, so I thought, why not to create one.
 
 You can check it out on pub:
-([see package on dartlang](http://pub.dartlang.org/packages/material_segmented_control))
+([see package on pub.dev](http://pub.dartlang.org/packages/material_segmented_control))
 
 
 ## How to use
@@ -28,7 +28,7 @@ In your pubspec.yaml, add
 
 ```dart
 dependencies: 
-    material_segmented_control: ^1.0.2
+    material_segmented_control: ^1.1.0
 ```
 
 
@@ -45,53 +45,44 @@ import 'package:material_segmented_control/material_segmented_control.dart';
 
 ```dart
 MaterialSegmentedControl(
-              reselectable: false,
               borderRadius: 32.0,
               children: <SegmentedItem>[
                 SegmentedItem(
                   colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.transparent,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('Rome'),
-                  ),
+                  colorIdle: Colors.white,
+                  child: Text('Rome'),
                   onSelected: (state) {
                     print("Hello, it's rome - ${state ? '' : 'un'}selected");
                   },
                 ),
                 SegmentedItem(
                   colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.transparent,
+                  colorIdle: Colors.white,
                   child: Text('New York'),
                 ),
                 SegmentedItem(
                   colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.transparent,
+                  colorIdle: Colors.white,
                   child: Text('Washington'),
                 ),
                 SegmentedItem(
                   colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.transparent,
+                  colorIdle: Colors.white,
                   child: Text('Berlin'),
                 ),
               ],
             );
 ```
 
-It is then ready to use
 
 ## In the future
 
 ### TODO
 
-a) If you don't want do define a selection and idle color for each item but general colors, set them in MSC (almost done, friends!)
+a) If you don't want do define a selection and idle color for each item, set them in MSC directly (almost done, friends!)
 
 b) Provide a vertical divider between each item
 
-c) Animate color changes (almost done, friends!)
-
 ### Known issues
-
--> Calling setState in `SegmentedItem`'s selection listener causes weird behaviour (you can select multiple items). This is an issue, cause you should only be able to mark ONLY ONE item as selected!
 
 -> Pixel overflow when the width of the whole control is larger than screen size. [WIP, see branch *multi-overflow-fix* for progress]
