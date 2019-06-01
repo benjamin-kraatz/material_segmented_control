@@ -1,3 +1,5 @@
+## [1.1.3] - Fixed initial selection
+
 ## [1.1.2] - Initial selection
 
 * Set initially selected item.

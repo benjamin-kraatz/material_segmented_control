@@ -171,6 +171,6 @@ class _SegmentedItemState extends State<SegmentedItem>
 
   @override
   void setInitiallySelected(bool isInitialSelect) {
-    _isSelected = true;
+    _isSelected = isInitialSelect;
   }
 }
