@@ -71,7 +71,7 @@ class _SegmentedItemState extends State<SegmentedItem>
   void didUpdateWidget(SegmentedItem oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    _isSelected = SegmentedItemSettings.SelectedItem.keyGlob.ident ==
+    _isSelected = SegmentedItemSettings.selectedItem.keyGlob.ident ==
         widget.keyGlob.ident;
   }
 
@@ -103,7 +103,7 @@ class _SegmentedItemState extends State<SegmentedItem>
   }
 
   void _toggleSelection() {
-    SegmentedItemSettings.SelectedItem = widget;
+    SegmentedItemSettings.selectedItem = widget;
 
     if (!mounted) return;
     setState(() {
@@ -167,5 +167,10 @@ class _SegmentedItemState extends State<SegmentedItem>
     } else if (index == maxCount - 1) {
       setLastItem();
     }
+  }
+
+  @override
+  void setInitiallySelected(bool isInitialSelect) {
+    _isSelected = true;
   }
 }

@@ -3,7 +3,7 @@ import 'segmented_children.dart';
 /// Holds information to set up a [SegmentedItem]
 class SegmentedItemSettings {
   /// The current selected item
-  static SegmentedItem SelectedItem =
+  static SegmentedItem selectedItem =
       SegmentedItem(colorSelected: null, colorIdle: null, child: null);
 
   double _borderRadius;

@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
       child: Center(
         child: MaterialSegmentedControl(
           borderRadius: 32.0,
+          initialSelection: 0,
           children: <SegmentedItem>[
             SegmentedItem(
               colorSelected: Colors.lightBlueAccent,

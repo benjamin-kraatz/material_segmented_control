@@ -28,7 +28,7 @@ In your pubspec.yaml, add
 
 ```dart
 dependencies: 
-    material_segmented_control: ^1.1.1
+    material_segmented_control: ^1.1.2
 ```
 
 
@@ -46,6 +46,7 @@ import 'package:material_segmented_control/material_segmented_control.dart';
 ```dart
 MaterialSegmentedControl(
               borderRadius: 32.0,
+              initialSelection: 0,
               children: <SegmentedItem>[
                 SegmentedItem(
                   colorSelected: Colors.blueAccent,

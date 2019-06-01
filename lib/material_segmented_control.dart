@@ -20,11 +20,15 @@ class MaterialSegmentedControl extends StatefulWidget {
   /// All the children inside. Left and right widget get rounded edges if [borderRadius] > 0
   final List<SegmentedItem> children;
 
+  /// Marks the child as active initially (null-based index)
+  final int initialSelection;
+
   MaterialSegmentedControl(
       {this.children,
       this.dividerWidth = 1.0,
       this.dividerColor = Colors.white,
-      this.borderRadius = 32.0});
+      this.borderRadius = 32.0,
+      this.initialSelection = 0});
 
   @override
   _MaterialSegmentedControlState createState() =>
@@ -54,6 +58,8 @@ class _MaterialSegmentedControlState extends State<MaterialSegmentedControl> {
             ..setKey(widget.children.indexOf(el).toString())
             ..find.setItemPosition(
                 widget.children.indexOf(el), widget.children.length)
+            ..find.setInitiallySelected(
+                widget.children.indexOf(el) == widget.initialSelection)
             ..find.setup(SegmentedItemSettings(widget.borderRadius))),
       ),
     );
