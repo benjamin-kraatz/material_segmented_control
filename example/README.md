@@ -52,7 +52,7 @@ MaterialSegmentedControl(
                     child: Icon(Icons.camera_front, color: Colors.black),
                   ),
                   onSelected: (state) {
-                    print("Hello, it's rome - ${state ? '' : 'un'}selected");
+                    print("Front camera selected");
                   },
                 ),
                 SegmentedItem(
