@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'segmented_children.dart';
 
 /// Holds information to set up a [SegmentedItem]
@@ -6,20 +8,14 @@ class SegmentedItemSettings {
   static SegmentedItem selectedItem =
       SegmentedItem(colorSelected: null, colorIdle: null, child: null);
 
-  double _borderRadius;
+  double borderRadius;
+
+  Color colorIdle;
+  Color colorSelected;
 
   /// Define a border radius with [_borderRadius]
-  SegmentedItemSettings(this._borderRadius);
-
-  /// Get the current [_borderRadius] setting
-  double get borderRadius => _borderRadius;
-
-  /// Sets the border radius to an instance of [SegmentedItemSettings]
-  /// and returns it with set value
-  SegmentedItemSettings setBorderRadius(double radius) {
-    _borderRadius = radius;
-    return this;
-  }
+  SegmentedItemSettings(
+      {this.borderRadius, this.colorIdle, this.colorSelected});
 }
 
 /// Used to define the current selected item

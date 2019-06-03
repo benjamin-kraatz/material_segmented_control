@@ -1,3 +1,7 @@
+## [1.2.0] - Colors can now be set in MaterialSegmentedControl
+
+* Define colors in MSC widget generally, you do not need to specify the colors for each item separately.
+
 ## [1.1.3] - Fixed initial selection
 
 ## [1.1.2] - Initial selection

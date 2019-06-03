@@ -61,6 +61,7 @@ class _SegmentedItemState extends State<SegmentedItem>
   bool _isLastItem = false;
   double _borderRadius = 0;
   bool _canSelect = true;
+  Color _idleColor, _selectedColor;
 
   @override
   void initState() {
@@ -81,11 +82,17 @@ class _SegmentedItemState extends State<SegmentedItem>
       borderRadius: _getBorderRadius(),
       child: AnimatedContainer(
         duration: Duration(milliseconds: 200),
-        color: _isSelected ? widget.colorSelected : widget.colorIdle,
+        color: _isSelected
+            ? widget.colorSelected ?? _selectedColor
+            : widget.colorIdle ?? _idleColor,
         curve: Curves.easeInCubic,
         child: InkWell(
-          splashColor: widget.colorSelected.withOpacity(0.7),
-          highlightColor: widget.colorSelected.withOpacity(0.25),
+          splashColor: widget.colorSelected == null
+              ? _selectedColor.withOpacity(0.7)
+              : widget.colorSelected.withOpacity(0.7),
+          highlightColor: widget.colorSelected == null
+              ? _selectedColor.withOpacity(0.7)
+              : widget.colorSelected.withOpacity(0.25),
           borderRadius: _getBorderRadius(),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -137,7 +144,9 @@ class _SegmentedItemState extends State<SegmentedItem>
 
   void _applySettings(SegmentedItemSettings settings) {
     if (settings != null) {
-      _borderRadius = settings.borderRadius;
+      _borderRadius = settings.borderRadius ?? 0;
+      _idleColor = settings.colorIdle ?? widget.colorIdle;
+      _selectedColor = settings.colorSelected ?? widget.colorSelected;
     }
   }
 

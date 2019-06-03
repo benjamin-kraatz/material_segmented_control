@@ -23,8 +23,16 @@ class MaterialSegmentedControl extends StatefulWidget {
   /// Marks the child as active initially (null-based index)
   final int initialSelection;
 
+  /// Used for unselected state for children if they have no color specified
+  final Color colorIdle;
+
+  /// Used for selected state for children if they have no color specified
+  final Color colorSelected;
+
   MaterialSegmentedControl(
       {this.children,
+      this.colorIdle,
+      this.colorSelected,
       this.dividerWidth = 1.0,
       this.dividerColor = Colors.white,
       this.borderRadius = 32.0,
@@ -60,7 +68,10 @@ class _MaterialSegmentedControlState extends State<MaterialSegmentedControl> {
                 widget.children.indexOf(el), widget.children.length)
             ..find.setInitiallySelected(
                 widget.children.indexOf(el) == widget.initialSelection)
-            ..find.setup(SegmentedItemSettings(widget.borderRadius))),
+            ..find.setup(SegmentedItemSettings(
+                borderRadius: widget.borderRadius,
+                colorIdle: widget.colorIdle,
+                colorSelected: widget.colorSelected))),
       ),
     );
   }

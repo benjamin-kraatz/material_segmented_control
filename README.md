@@ -24,11 +24,11 @@ You can check it out on pub:
 
 ### Import the package
 
-In your pubspec.yaml, add
+In your `pubspec.yaml`, add
 
 ```dart
 dependencies: 
-    material_segmented_control: ^1.1.3
+    material_segmented_control: ^1.2.0
 ```
 
 
@@ -47,10 +47,12 @@ import 'package:material_segmented_control/material_segmented_control.dart';
 MaterialSegmentedControl(
               borderRadius: 32.0,
               initialSelection: 0,
+              colorIdle: Colors.white,
+              colorSelected: Colors.blueAccent,
               children: <SegmentedItem>[
                 SegmentedItem(
-                  colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.white,
+                  colorSelected: Colors.blueAccent,// --> not necessary if defined in parent widget!
+                  colorIdle: Colors.white, // --> not necessary if defined in parent widget!
                   child: Text('Rome'),
                   onSelected: (state) {
                     print("Hello, it's rome - ${state ? '' : 'un'}selected");
@@ -80,9 +82,7 @@ MaterialSegmentedControl(
 
 ### TODO
 
-a) If you don't want do define a selection and idle color for each item, set them in MSC directly (almost done, friends!)
-
-b) Provide a vertical divider between each item
+a) Provide a vertical divider between each item
 
 ### Known issues
 
