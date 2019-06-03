@@ -1,13 +1,10 @@
 # Material Segmented Control
 
-A material segmented control like the one for iOS, in Material style
+A material segmented control like the one for iOS, in Material style.
 
 ![image](https://github.com/beagle-barks/material_segmented_control/blob/master/images/msc_110.jpg "Preview")
 
-To see TODOs, upcoming features and known issues, see "In the future" section
-
-
-*For important notes and TODOs, see TODO section below!*
+To see TODOs, upcoming features and known issues, got to **[In the future section](https://github.com/beagle-barks/material_segmented_control#in-the-future)**
 
 
 ## Why?
@@ -80,13 +77,13 @@ MaterialSegmentedControl(
 
 ## In the future
 
-### TODO
+### TODOs
 
 a) Provide a vertical divider between each item
 
 ### Known issues
 
--> Pixel overflow when the width of the whole control is larger than screen size. [WIP, see branch *multi-overflow-fix* for progress]
+> -> Pixel overflow when the width of the whole control is larger than screen size. (WIP, see branch **[multi-overflow-fix](https://github.com/beagle-barks/material_segmented_control/tree/multi-overflow-fix)** for progress
 
 
 ### Documentation
