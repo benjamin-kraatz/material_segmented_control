@@ -87,3 +87,8 @@ a) Provide a vertical divider between each item
 ### Known issues
 
 -> Pixel overflow when the width of the whole control is larger than screen size. [WIP, see branch *multi-overflow-fix* for progress]
+
+
+### Documentation
+
+Open [the wiki](https://github.com/beagle-barks/material_segmented_control/wiki) to see the documentation
