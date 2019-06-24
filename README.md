@@ -82,3 +82,8 @@ a) InkWell/Ripple effect
 ### Documentation
 
 Open [the wiki](https://github.com/beagle-barks/material_segmented_control/wiki) to see the documentation
+
+
+## Behind the scenes
+
+> **Thanks to Flutter, who made this project successful!**
