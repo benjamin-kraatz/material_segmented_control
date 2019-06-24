@@ -43,37 +43,28 @@ import 'package:material_segmented_control/material_segmented_control.dart';
 ### Basic usage
 
 ```dart
+int _currentSelection = 0;
+
 MaterialSegmentedControl(
-              borderRadius: 32.0,
-              initialSelection: 0,
-              colorIdle: Colors.white,
-              colorSelected: Colors.blueAccent,
-              children: <SegmentedItem>[
-                SegmentedItem(
-                  colorSelected: Colors.blueAccent,// --> not necessary if defined in parent widget!
-                  colorIdle: Colors.white, // --> not necessary if defined in parent widget!
-                  child: Text('Rome'),
-                  onSelected: (state) {
-                    print("Hello, it's rome - ${state ? '' : 'un'}selected");
-                  },
-                ),
-                SegmentedItem(
-                  colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.white,
-                  child: Text('New York'),
-                ),
-                SegmentedItem(
-                  colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.white,
-                  child: Text('Washington'),
-                ),
-                SegmentedItem(
-                  colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.white,
-                  child: Text('Berlin'),
-                ),
-              ],
-            );
+          children: _children(),
+          selectionIndex: _currentSelection,
+          borderColor: Colors.grey,
+          selectedColor: Colors.redAccent,
+          unselectedColor: Colors.white,
+          borderRadius: 32.0,
+          onValueChanged: (index) {
+            setState(() {
+              _currentSelection = index;
+            });
+          },
+         )
+
+Map<int, Widget> _children() => {
+  0: Text('Hummingbird'),
+  1: Text('Kiwi'),
+  2: Text('Rio'),
+  3: Text('Telluraves')
+};
 ```
 
 
