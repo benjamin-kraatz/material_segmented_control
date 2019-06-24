@@ -6,9 +6,6 @@ import 'mixins/locator_mixin.dart';
 import 'segmented_item_settings.dart';
 import 'material_segmented_control.dart';
 
-/// Callback function when an item is selected and its state
-typedef SegmentChosen = void Function(bool);
-
 /// A segmented item.
 /// Use this to show a segment inside [MaterialSegmentedControl].
 ///
@@ -26,9 +23,6 @@ class SegmentedItem extends StatefulWidget {
   /// Unselected color
   final Color colorIdle;
 
-  /// Callback field when an item is selected
-  final SegmentChosen onSelected;
-
   /// The item's content
   final Widget child;
 
@@ -39,8 +33,7 @@ class SegmentedItem extends StatefulWidget {
   SegmentedItem(
       {@required this.colorSelected,
       @required this.colorIdle,
-      @required this.child,
-      this.onSelected});
+      @required this.child});
 
   final SegmentedLocatorMixin _state = _SegmentedItemState();
 
@@ -102,7 +95,6 @@ class _SegmentedItemState extends State<SegmentedItem>
           onTap: () {
             if (!_canSelect && _isSelected) return;
             _toggleSelection();
-            if (widget.onSelected != null) widget.onSelected(_isSelected);
           },
         ),
       ),
@@ -116,6 +108,10 @@ class _SegmentedItemState extends State<SegmentedItem>
     setState(() {
       _isSelected = !_isSelected;
     });
+  }
+
+  void listen(Function(int) callback) {
+    callback(0);
   }
 
   @override
