@@ -2,7 +2,9 @@
 
 A material segmented control like the one for iOS, in Material style.
 
-![image](https://github.com/beagle-barks/material_segmented_control/blob/master/images/msc_110.jpg "Preview")
+Now available in **version 2**!
+
+![image](https://github.com/beagle-barks/material_segmented_control/blob/v2-0-x/images/20190624_235551.jpg "Preview")
 
 To see TODOs, upcoming features and known issues, got to **[In the future section](https://github.com/beagle-barks/material_segmented_control#in-the-future)**
 
@@ -25,7 +27,7 @@ In your `pubspec.yaml`, add
 
 ```dart
 dependencies: 
-    material_segmented_control: ^1.2.0
+    material_segmented_control: ^2.0.1
 ```
 
 
@@ -41,37 +43,28 @@ import 'package:material_segmented_control/material_segmented_control.dart';
 ### Basic usage
 
 ```dart
+int _currentSelection = 0;
+
 MaterialSegmentedControl(
-              borderRadius: 32.0,
-              initialSelection: 0,
-              colorIdle: Colors.white,
-              colorSelected: Colors.blueAccent,
-              children: <SegmentedItem>[
-                SegmentedItem(
-                  colorSelected: Colors.blueAccent,// --> not necessary if defined in parent widget!
-                  colorIdle: Colors.white, // --> not necessary if defined in parent widget!
-                  child: Text('Rome'),
-                  onSelected: (state) {
-                    print("Hello, it's rome - ${state ? '' : 'un'}selected");
-                  },
-                ),
-                SegmentedItem(
-                  colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.white,
-                  child: Text('New York'),
-                ),
-                SegmentedItem(
-                  colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.white,
-                  child: Text('Washington'),
-                ),
-                SegmentedItem(
-                  colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.white,
-                  child: Text('Berlin'),
-                ),
-              ],
-            );
+          children: _children(),
+          selectionIndex: _currentSelection,
+          borderColor: Colors.grey,
+          selectedColor: Colors.redAccent,
+          unselectedColor: Colors.white,
+          borderRadius: 32.0,
+          onSegmentChosen: (index) {
+            setState(() {
+              _currentSelection = index;
+            });
+          },
+         )
+
+Map<int, Widget> _children() => {
+  0: Text('Hummingbird'),
+  1: Text('Kiwi'),
+  2: Text('Rio'),
+  3: Text('Telluraves')
+};
 ```
 
 
@@ -79,14 +72,24 @@ MaterialSegmentedControl(
 
 ### TODOs
 
+<<<<<<< HEAD
 * Provide a vertical divider between each item
 * Little tooltip on long press showing a bite more detail for a segment
+=======
+* InkWell/Ripple effect
+* Tooltip showing a bit more details for a segment
+>>>>>>> v2-0-x
 
 ### Known issues
 
-> -> Pixel overflow when the width of the whole control is larger than screen size. (WIP, see branch **[multi-overflow-fix](https://github.com/beagle-barks/material_segmented_control/tree/multi-overflow-fix)** for progress and [the Wiki](https://github.com/beagle-barks/material_segmented_control/wiki/Help) for more information)
+> Currently there are no known issues. Yey!
 
 
 ### Documentation
 
 Open [the wiki](https://github.com/beagle-barks/material_segmented_control/wiki) to see the documentation
+
+
+## Behind the scenes
+
+> **Thanks to Flutter, making this project successful!**

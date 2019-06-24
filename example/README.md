@@ -4,72 +4,28 @@ This example shows how to use this widget in your project.
 
 ## Code
 
-### With text
+### Basic implementation
 ```dart
-MaterialSegmentedControl(
-              borderRadius: 32.0,
-              children: <SegmentedItem>[
-                SegmentedItem(
-                  colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('Rome'),
-                  ),
-                  onSelected: (state) {
-                    print("Hello, it's rome - ${state ? '' : 'un'}selected");
-                  },
-                ),
-                SegmentedItem(
-                  colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.white,
-                  child: Text('New York'),
-                ),
-                SegmentedItem(
-                  colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.white,
-                  child: Text('Washington'),
-                ),
-                SegmentedItem(
-                  colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.white,
-                  child: Text('Berlin'),
-                ),
-              ],
-            );
-```
+int _currentSelection = 0;
 
-### With icons
-```dart
 MaterialSegmentedControl(
-              borderRadius: 32.0,
-              children: <SegmentedItem>[
-                SegmentedItem(
-                  colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.camera_front, color: Colors.black),
-                  ),
-                  onSelected: (state) {
-                    print("Front camera selected");
-                  },
-                ),
-                SegmentedItem(
-                  colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.white,
-                    child: Icon(Icons.camera_rear, color: Colors.black),
-                ),
-                SegmentedItem(
-                  colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.white,
-                    child: Icon(Icons.remove, color: Colors.black),
-                ),
-                SegmentedItem(
-                  colorSelected: Colors.blueAccent,
-                  colorIdle: Colors.white,
-                    child: Icon(Icons.wb_sunny, color: Colors.black),
-                ),
-              ],
-            );
+          children: _children(),
+          selectionIndex: _currentSelection,
+          borderColor: Colors.grey,
+          selectedColor: Colors.redAccent,
+          unselectedColor: Colors.white,
+          borderRadius: 32.0,
+          onSegmentChosen: (index) {
+            setState(() {
+              _currentSelection = index;
+            });
+          },
+         )
+
+Map<int, Widget> _children() => {
+  0: Text('Hummingbird'),
+  1: Text('Kiwi'),
+  2: Text('Rio'),
+  3: Text('Telluraves')
+};
 ```
