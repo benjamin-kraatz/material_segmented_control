@@ -40,7 +40,7 @@ const Duration _kFadeDuration = Duration(milliseconds: 222);
 /// [onValueChanged] callback. The map key associated with the newly selected
 /// widget is returned in the [onValueChanged] callback. Typically, widgets
 /// that use a segmented control will listen for the [onValueChanged] callback
-/// and rebuild the segmented control with a new [groupValue] to update which
+/// and rebuild the segmented control with a new [selectionIndex] to update which
 /// option is currently selected.
 ///
 /// The [children] will be displayed in the order of the keys in the [Map].
@@ -74,26 +74,25 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   /// in the [onValueChanged] callback when a new value from the [children] map
   /// is selected.
   ///
-  /// The [groupValue] is the currently selected value for the segmented control.
-  /// If no [groupValue] is provided, or the [groupValue] is null, no widget will
-  /// appear as selected. The [groupValue] must be either null or one of the keys
+  /// The [selectionIndex] is the currently selected value for the segmented control.
+  /// If no [selectionIndex] is provided, or the [selectionIndex] is null, no widget will
+  /// appear as selected. The [selectionIndex] must be either null or one of the keys
   /// in the [children] map.
   MaterialSegmentedControl(
       {Key key,
       @required this.children,
       @required this.onValueChanged,
-      this.groupValue,
+      this.selectionIndex,
       this.unselectedColor,
       this.selectedColor,
       this.borderColor,
-      this.pressedColor,
       this.borderRadius = 32.0})
       : assert(children != null),
         assert(children.length >= 2),
         assert(onValueChanged != null),
         assert(
-          groupValue == null ||
-              children.keys.any((T child) => child == groupValue),
+          selectionIndex == null ||
+              children.keys.any((T child) => child == selectionIndex),
           'The groupValue must be either null or one of the keys in the children map.',
         ),
         super(key: key);
@@ -109,7 +108,7 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   ///
   /// This must be one of the keys in the [Map] of [children].
   /// If this attribute is null, no widget will be initially selected.
-  final T groupValue;
+  final T selectionIndex;
 
   /// The callback that is called when a new option is tapped.
   ///
@@ -117,7 +116,7 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   ///
   /// The segmented control passes the newly selected widget's associated key
   /// to the callback but does not actually change state until the parent
-  /// widget rebuilds the segmented control with the new [groupValue].
+  /// widget rebuilds the segmented control with the new [selectionIndex].
   ///
   /// The callback provided to [onValueChanged] should update the state of
   /// the parent [StatefulWidget] using the [State.setState] method, so that
@@ -175,12 +174,9 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   /// Defaults to [CupertinoTheme]'s `primaryColor` if null.
   final Color borderColor;
 
-  /// The color used to fill the background of the widget the user is
-  /// temporarily interacting with through a long press or drag.
+  /// The border radius used on the left and right side.
   ///
-  /// Defaults to the selectedColor at 20% opacity if null.
-  final Color pressedColor;
-
+  /// Defaults to 32.0 if null
   final double borderRadius;
 
   @override
@@ -272,7 +268,7 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
     for (T key in widget.children.keys) {
       final AnimationController animationController =
           createAnimationController();
-      if (widget.groupValue == key) {
+      if (widget.selectionIndex == key) {
         _childTweens.add(_reverseBackgroundColorTween);
         animationController.value = 1.0;
       } else {
@@ -300,10 +296,10 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
       _updateAnimationControllers();
     }
 
-    if (oldWidget.groupValue != widget.groupValue) {
+    if (oldWidget.selectionIndex != widget.selectionIndex) {
       int index = 0;
       for (T key in widget.children.keys) {
-        if (widget.groupValue == key) {
+        if (widget.selectionIndex == key) {
           _childTweens[index] = _forwardBackgroundColorTween;
           _selectionControllers[index].forward();
         } else {
@@ -324,7 +320,7 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
   }
 
   void _onTapDown(T currentKey) {
-    if (_pressedKey == null && currentKey != widget.groupValue) {
+    if (_pressedKey == null && currentKey != widget.selectionIndex) {
       setState(() {
         _pressedKey = currentKey;
       });
@@ -338,7 +334,7 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
   }
 
   void _onTap(T currentKey) {
-    if (currentKey != widget.groupValue && currentKey == _pressedKey) {
+    if (currentKey != widget.selectionIndex && currentKey == _pressedKey) {
       widget.onValueChanged(currentKey);
       _pressedKey = null;
     }
@@ -347,14 +343,14 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
   Color getTextColor(int index, T currentKey) {
     if (_selectionControllers[index].isAnimating)
       return _textColorTween.evaluate(_selectionControllers[index]);
-    if (widget.groupValue == currentKey) return _unselectedTextColor;
+    if (widget.selectionIndex == currentKey) return _unselectedTextColor;
     return _selectedTextColor;
   }
 
   Color getBackgroundColor(int index, T currentKey) {
     if (_selectionControllers[index].isAnimating)
       return _childTweens[index].evaluate(_selectionControllers[index]);
-    if (widget.groupValue == currentKey) return _selectedColor;
+    if (widget.selectionIndex == currentKey) return _selectedColor;
     if (_pressedKey == currentKey) return _pressedColor;
     return _unselectedColor;
   }
@@ -367,7 +363,8 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
     int selectedIndex;
     int pressedIndex;
     for (T currentKey in widget.children.keys) {
-      selectedIndex = (widget.groupValue == currentKey) ? index : selectedIndex;
+      selectedIndex =
+          (widget.selectionIndex == currentKey) ? index : selectedIndex;
       pressedIndex = (_pressedKey == currentKey) ? index : pressedIndex;
 
       final TextStyle textStyle = DefaultTextStyle.of(context).style.copyWith(
@@ -398,7 +395,7 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
             child: Semantics(
               button: true,
               inMutuallyExclusiveGroup: true,
-              selected: widget.groupValue == currentKey,
+              selected: widget.selectionIndex == currentKey,
               child: child,
             ),
           ),

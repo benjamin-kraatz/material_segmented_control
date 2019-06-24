@@ -2,6 +2,8 @@
 
 A material segmented control like the one for iOS, in Material style.
 
+Now available in **version 2**!
+
 ![image](https://github.com/beagle-barks/material_segmented_control/blob/v2-0-x/images/20190624_235551.jpg "Preview")
 
 To see TODOs, upcoming features and known issues, got to **[In the future section](https://github.com/beagle-barks/material_segmented_control#in-the-future)**
@@ -25,7 +27,7 @@ In your `pubspec.yaml`, add
 
 ```dart
 dependencies: 
-    material_segmented_control: ^1.2.0
+    material_segmented_control: ^2.0.1
 ```
 
 
@@ -79,11 +81,11 @@ MaterialSegmentedControl(
 
 ### TODOs
 
-a) Provide a vertical divider between each item
+a) InkWell/Ripple effect
 
 ### Known issues
 
-> -> Pixel overflow when the width of the whole control is larger than screen size. (WIP, see branch **[multi-overflow-fix](https://github.com/beagle-barks/material_segmented_control/tree/multi-overflow-fix)** for progress and [the Wiki](https://github.com/beagle-barks/material_segmented_control/wiki/Help) for more information)
+> Currently there are no known issues. Yey!
 
 
 ### Documentation

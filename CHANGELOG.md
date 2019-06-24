@@ -1,3 +1,15 @@
+## [2.0.1] - MSC v2!
+
+* **Maybe breaking version** 
+
+* Completely new approach behind the scenes
+* New coloring options
+* More customization
+* Define one single listener to get selected state
+* Removed issues
+* Better documentation on how to use
+* Works with every widget directly, no need to use a special class `SegmentedItem`
+
 ## [1.2.0] - Colors can now be set in MaterialSegmentedControl
 
 * Define colors in MSC widget generally, you do not need to specify the colors for each item separately.
