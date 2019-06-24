@@ -86,4 +86,4 @@ Open [the wiki](https://github.com/beagle-barks/material_segmented_control/wiki)
 
 ## Behind the scenes
 
-> **Thanks to Flutter, who made this project successful!**
+> **Thanks to Flutter, that makes this project successful!**
