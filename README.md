@@ -27,7 +27,7 @@ In your `pubspec.yaml`, add
 
 ```dart
 dependencies: 
-    material_segmented_control: ^2.0.2
+    material_segmented_control: ^2.0.3
 ```
 
 
