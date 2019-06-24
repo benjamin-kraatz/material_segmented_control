@@ -2,7 +2,7 @@
 
 A material segmented control like the one for iOS, in Material style.
 
-![image](https://github.com/beagle-barks/material_segmented_control/blob/master/images/msc_110.jpg "Preview")
+![image](https://github.com/beagle-barks/material_segmented_control/blob/v2-0-x/images/20190624_235551.jpg "Preview")
 
 To see TODOs, upcoming features and known issues, got to **[In the future section](https://github.com/beagle-barks/material_segmented_control#in-the-future)**
 
