@@ -20,7 +20,7 @@ const double _kMinSegmentedControlHeight = 28.0;
 
 // The duration of the fade animation used to transition when a new widget
 // is selected.
-const Duration _kFadeDuration = Duration(milliseconds: 165);
+const Duration _kFadeDuration = Duration(milliseconds: 222);
 
 /// An iOS-style segmented control.
 ///
@@ -78,16 +78,17 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   /// If no [groupValue] is provided, or the [groupValue] is null, no widget will
   /// appear as selected. The [groupValue] must be either null or one of the keys
   /// in the [children] map.
-  MaterialSegmentedControl({
-    Key key,
-    @required this.children,
-    @required this.onValueChanged,
-    this.groupValue,
-    this.unselectedColor,
-    this.selectedColor,
-    this.borderColor,
-    this.pressedColor,
-  })  : assert(children != null),
+  MaterialSegmentedControl(
+      {Key key,
+      @required this.children,
+      @required this.onValueChanged,
+      this.groupValue,
+      this.unselectedColor,
+      this.selectedColor,
+      this.borderColor,
+      this.pressedColor,
+      this.borderRadius = 32.0})
+      : assert(children != null),
         assert(children.length >= 2),
         assert(onValueChanged != null),
         assert(
@@ -180,6 +181,8 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   /// Defaults to the selectedColor at 20% opacity if null.
   final Color pressedColor;
 
+  final double borderRadius;
+
   @override
   _SegmentedControlState<T> createState() => _SegmentedControlState<T>();
 }
@@ -198,8 +201,12 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
 
   Color _selectedColor;
   Color _unselectedColor;
+  Color _selectedTextColor;
+  Color _unselectedTextColor;
   Color _borderColor;
   Color _pressedColor;
+
+  final double _verticalOffset = 12.0;
 
   AnimationController createAnimationController() {
     return AnimationController(
@@ -230,12 +237,14 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
       changed = true;
       _borderColor = borderColor;
     }
-    final Color pressedColor =
-        widget.pressedColor ?? Colors.blueAccent.withOpacity(0.2);
+    final Color pressedColor = widget.selectedColor.withOpacity(0.2);
     if (_pressedColor != pressedColor) {
       changed = true;
       _pressedColor = pressedColor;
     }
+
+    _selectedTextColor = _selectedColor;
+    _unselectedTextColor = _unselectedColor;
 
     _forwardBackgroundColorTween = ColorTween(
       begin: _pressedColor,
@@ -338,8 +347,8 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
   Color getTextColor(int index, T currentKey) {
     if (_selectionControllers[index].isAnimating)
       return _textColorTween.evaluate(_selectionControllers[index]);
-    if (widget.groupValue == currentKey) return _unselectedColor;
-    return _selectedColor;
+    if (widget.groupValue == currentKey) return _unselectedTextColor;
+    return _selectedTextColor;
   }
 
   Color getBackgroundColor(int index, T currentKey) {
@@ -369,7 +378,9 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
       );
 
       Widget child = Center(
-        child: widget.children[currentKey],
+        child: Padding(
+            padding: EdgeInsets.symmetric(vertical: _verticalOffset),
+            child: widget.children[currentKey]),
       );
 
       child = GestureDetector(
@@ -405,13 +416,18 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
       pressedIndex: pressedIndex,
       backgroundColors: _backgroundColors,
       borderColor: _borderColor,
+      borderRadius: widget.borderRadius,
     );
 
-    return Padding(
-      padding: _kHorizontalItemPadding.resolve(Directionality.of(context)),
-      child: UnconstrainedBox(
-        constrainedAxis: Axis.horizontal,
-        child: box,
+    return InkWell(
+      splashColor: Colors.red,
+      highlightColor: Colors.greenAccent,
+      child: Padding(
+        padding: _kHorizontalItemPadding.resolve(Directionality.of(context)),
+        child: UnconstrainedBox(
+          constrainedAxis: Axis.horizontal,
+          child: box,
+        ),
       ),
     );
   }
@@ -425,6 +441,7 @@ class _SegmentedControlRenderWidget<T> extends MultiChildRenderObjectWidget {
     @required this.pressedIndex,
     @required this.backgroundColors,
     @required this.borderColor,
+    @required this.borderRadius,
   }) : super(
           key: key,
           children: children,
@@ -434,6 +451,7 @@ class _SegmentedControlRenderWidget<T> extends MultiChildRenderObjectWidget {
   final int pressedIndex;
   final List<Color> backgroundColors;
   final Color borderColor;
+  final double borderRadius;
 
   @override
   RenderObject createRenderObject(BuildContext context) {
@@ -443,6 +461,7 @@ class _SegmentedControlRenderWidget<T> extends MultiChildRenderObjectWidget {
       pressedIndex: pressedIndex,
       backgroundColors: backgroundColors,
       borderColor: borderColor,
+      borderRadius: borderRadius,
     );
   }
 
@@ -478,15 +497,19 @@ class _RenderSegmentedControl<T> extends RenderBox
     @required TextDirection textDirection,
     @required List<Color> backgroundColors,
     @required Color borderColor,
+    @required double borderRadius,
   })  : assert(textDirection != null),
+        assert(borderRadius != null),
         _textDirection = textDirection,
         _selectedIndex = selectedIndex,
         _pressedIndex = pressedIndex,
         _backgroundColors = backgroundColors,
-        _borderColor = borderColor {
+        _borderColor = borderColor,
+        _borderRadius = borderRadius {
     addAll(children);
   }
 
+  double _borderRadius;
   int get selectedIndex => _selectedIndex;
   int _selectedIndex;
   set selectedIndex(int value) {
@@ -619,12 +642,12 @@ class _RenderSegmentedControl<T> extends RenderBox
       RRect rChildRect;
       if (child == leftChild) {
         rChildRect = RRect.fromRectAndCorners(childRect,
-            topLeft: const Radius.circular(3.0),
-            bottomLeft: const Radius.circular(3.0));
+            topLeft: Radius.circular(_borderRadius),
+            bottomLeft: Radius.circular(_borderRadius));
       } else if (child == rightChild) {
         rChildRect = RRect.fromRectAndCorners(childRect,
-            topRight: const Radius.circular(3.0),
-            bottomRight: const Radius.circular(3.0));
+            topRight: Radius.circular(_borderRadius),
+            bottomRight: Radius.circular(_borderRadius));
       } else {
         rChildRect = RRect.fromRectAndCorners(childRect);
       }
@@ -713,7 +736,7 @@ class _RenderSegmentedControl<T> extends RenderBox
       childParentData.surroundingRect.shift(offset),
       Paint()
         ..color = borderColor
-        ..strokeWidth = 1.0
+        ..strokeWidth = 0.7
         ..style = PaintingStyle.stroke,
     );
 
