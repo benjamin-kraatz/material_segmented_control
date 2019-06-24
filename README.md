@@ -72,13 +72,8 @@ Map<int, Widget> _children() => {
 
 ### TODOs
 
-<<<<<<< HEAD
-* Provide a vertical divider between each item
-* Little tooltip on long press showing a bite more detail for a segment
-=======
 * InkWell/Ripple effect
 * Tooltip showing a bit more details for a segment
->>>>>>> v2-0-x
 
 ### Known issues
 
