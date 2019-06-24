@@ -1,3 +1,5 @@
+## [2.0.2] - Minor fixes
+
 ## [2.0.1] - MSC v2!
 
 * **Maybe breaking version** 
