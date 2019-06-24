@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
-import 'package:material_segmented_control/segmented_children.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,7 +24,7 @@ class _MyAppState extends State<MyApp> {
           selectedColor: Colors.redAccent,
           unselectedColor: Colors.white,
           borderRadius: 32.0,
-          onValueChanged: (index) {
+          onSegmentChosen: (index) {
             setState(() {
               _currentSelection = index;
             });

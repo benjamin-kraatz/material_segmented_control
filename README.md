@@ -52,7 +52,7 @@ MaterialSegmentedControl(
           selectedColor: Colors.redAccent,
           unselectedColor: Colors.white,
           borderRadius: 32.0,
-          onValueChanged: (index) {
+          onSegmentChosen: (index) {
             setState(() {
               _currentSelection = index;
             });

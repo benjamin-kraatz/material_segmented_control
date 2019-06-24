@@ -1,6 +1,5 @@
 library material_segmented_control;
 
-import 'dart:collection';
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
@@ -8,78 +7,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-// Minimum padding from horizontal edges of segmented control to edges of
-// encompassing widget.
-const EdgeInsets _kHorizontalItemPadding =
-    EdgeInsets.symmetric(horizontal: 16.0);
+// Horizontal padding for widget
+const EdgeInsets _horizontalPadding = EdgeInsets.symmetric(horizontal: 16.0);
 
 // Minimum height of the segmented control.
-const double _kMinSegmentedControlHeight = 28.0;
+const double _minSegmentHeight = 28.0;
 
-// The duration of the fade animation used to transition when a new widget
-// is selected.
-const Duration _kFadeDuration = Duration(milliseconds: 222);
+// The duration of the fade animation when a color gets selected
+// and unselected
+const Duration _colorFadeDuration = Duration(milliseconds: 222);
 
-/// An iOS-style segmented control.
+/// Material Segmented Control
 ///
-/// Displays the widgets provided in the [Map] of [children] in a
-/// horizontal list. Used to select between a number of mutually exclusive
-/// options. When one option in the segmented control is selected, the other
-/// options in the segmented control cease to be selected.
+/// A segmented control like the one for iOS, but in Material Design.
 ///
-/// A segmented control can feature any [Widget] as one of the values in its
-/// [Map] of [children]. The type T is the type of the keys used
-/// to identify each widget and determine which widget is selected. As
-/// required by the [Map] class, keys must be of consistent types
-/// and must be comparable. The ordering of the keys will determine the order
-/// of the widgets in the segmented control.
+/// You can use any [Widget] to make it a segmented item. Simply
+/// define a [Map] with indices.
 ///
-/// When the state of the segmented control changes, the widget calls the
-/// [onValueChanged] callback. The map key associated with the newly selected
-/// widget is returned in the [onValueChanged] callback. Typically, widgets
-/// that use a segmented control will listen for the [onValueChanged] callback
-/// and rebuild the segmented control with a new [selectionIndex] to update which
-/// option is currently selected.
+/// [onSegmentChosen] is called whenever a segmented item is clicked.
+/// You need to pass it to [selectionIndex] to tell MSC what index
+/// is currently selected. Make sure to update it via [setState].
 ///
-/// The [children] will be displayed in the order of the keys in the [Map].
-/// The height of the segmented control is determined by the height of the
-/// tallest widget provided as a value in the [Map] of [children].
-/// The width of each child in the segmented control will be equal to the width
-/// of widest child, unless the combined width of the children is wider than
-/// the available horizontal space. In this case, the available horizontal space
-/// is divided by the number of provided [children] to determine the width of
-/// each widget. The selection area for each of the widgets in the [Map] of
-/// [children] will then be expanded to fill the calculated space, so each
-/// widget will appear to have the same dimensions.
+/// The [children] are displayed in increasing order of the indeces
+/// given in the [Map].
+/// The width for an item is set to the width of the largest child.
 ///
-/// A segmented control may optionally be created with custom colors. The
-/// [unselectedColor], [selectedColor], [borderColor], and [pressedColor]
-/// arguments can be used to override the segmented control's colors from
-/// [CupertinoTheme] defaults.
-///
-/// See also:
-///
-///  * <https://developer.apple.com/design/human-interface-guidelines/ios/controls/segmented-controls/>
+/// [selectedColor] and [unselectedColor] are set to [Colors.blue]
+/// and [Colors.white] when they are null and are not explicitly
+/// required but recommended to set for your needs.
 class MaterialSegmentedControl<T> extends StatefulWidget {
-  /// Creates an iOS-style segmented control bar.
-  ///
-  /// The [children] and [onValueChanged] arguments must not be null. The
-  /// [children] argument must be an ordered [Map] such as a [LinkedHashMap].
-  /// Further, the length of the [children] list must be greater than one.
-  ///
-  /// Each widget value in the map of [children] must have an associated key
-  /// that uniquely identifies this widget. This key is what will be returned
-  /// in the [onValueChanged] callback when a new value from the [children] map
-  /// is selected.
-  ///
-  /// The [selectionIndex] is the currently selected value for the segmented control.
-  /// If no [selectionIndex] is provided, or the [selectionIndex] is null, no widget will
-  /// appear as selected. The [selectionIndex] must be either null or one of the keys
-  /// in the [children] map.
   MaterialSegmentedControl(
       {Key key,
       @required this.children,
-      @required this.onValueChanged,
+      @required this.onSegmentChosen,
       this.selectionIndex,
       this.unselectedColor,
       this.selectedColor,
@@ -87,7 +47,7 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
       this.borderRadius = 32.0})
       : assert(children != null),
         assert(children.length >= 2),
-        assert(onValueChanged != null),
+        assert(onSegmentChosen != null),
         assert(
           selectionIndex == null ||
               children.keys.any((T child) => child == selectionIndex),
@@ -95,81 +55,40 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
         ),
         super(key: key);
 
-  /// The identifying keys and corresponding widget values in the
-  /// segmented control.
-  ///
-  /// The map must have more than one entry.
-  /// This attribute must be an ordered [Map] such as a [LinkedHashMap].
-  final Map<T, Widget> children;
-
-  /// The identifier of the widget that is currently selected.
-  ///
-  /// This must be one of the keys in the [Map] of [children].
-  /// If this attribute is null, no widget will be initially selected.
-  final T selectionIndex;
-
-  /// The callback that is called when a new option is tapped.
-  ///
-  /// This attribute must not be null.
-  ///
-  /// The segmented control passes the newly selected widget's associated key
-  /// to the callback but does not actually change state until the parent
-  /// widget rebuilds the segmented control with the new [selectionIndex].
-  ///
-  /// The callback provided to [onValueChanged] should update the state of
-  /// the parent [StatefulWidget] using the [State.setState] method, so that
-  /// the parent gets rebuilt; for example:
-  ///
+  /// The children to use. They need to live inside a [Map]
+  /// with indices; make sure they are in increasing order.
   /// {@tool sample}
   ///
   /// ```dart
-  /// class SegmentedControlExample extends StatefulWidget {
-  ///   @override
-  ///   State createState() => SegmentedControlExampleState();
-  /// }
-  ///
-  /// class SegmentedControlExampleState extends State<SegmentedControlExample> {
-  ///   final Map<int, Widget> children = const {
-  ///     0: Text('Child 1'),
-  ///     1: Text('Child 2'),
-  ///   };
-  ///
-  ///   int currentValue;
-  ///
-  ///   @override
-  ///   Widget build(BuildContext context) {
-  ///     return Container(
-  ///       child: CupertinoSegmentedControl<int>(
-  ///         children: children,
-  ///         onValueChanged: (int newValue) {
-  ///           setState(() {
-  ///             currentValue = newValue;
-  ///           });
-  ///         },
-  ///         groupValue: currentValue,
-  ///       ),
-  ///     );
-  ///   }
+  /// Map<int, Widget> children() => {
+  ///  0: Text('Sec 1'),
+  ///  1: Text('Sec 2'),
+  ///  2: Text('Sec 3'),
   /// }
   /// ```
   /// {@end-tool}
-  final ValueChanged<T> onValueChanged;
+  final Map<T, Widget> children;
 
-  /// The color used to fill the backgrounds of unselected widgets and as the
-  /// text color of the selected widget.
+  /// Currently selected item index. Make sure to pass the value
+  /// from [onSegmentChosen] to see the selection state.
+  final T selectionIndex;
+
+  /// The callback to use when a segmented item is chosen
+  final ValueChanged<T> onSegmentChosen;
+
+  /// Unselected color.
   ///
-  /// Defaults to [CupertinoTheme]'s `primaryContrastingColor` if null.
+  /// [Colors.white] by default if null
   final Color unselectedColor;
 
-  /// The color used to fill the background of the selected widget and as the text
-  /// color of unselected widgets.
+  /// Selected color.
   ///
-  /// Defaults to [CupertinoTheme]'s `primaryColor` if null.
+  /// [Colors.blue] by default if null
   final Color selectedColor;
 
-  /// The color used as the border around each widget.
+  /// Color used as border color.
   ///
-  /// Defaults to [CupertinoTheme]'s `primaryColor` if null.
+  /// [Colors.grey] by default if null.
   final Color borderColor;
 
   /// The border radius used on the left and right side.
@@ -204,7 +123,7 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
 
   AnimationController createAnimationController() {
     return AnimationController(
-      duration: _kFadeDuration,
+      duration: _colorFadeDuration,
       vsync: this,
     )..addListener(() {
         setState(() {
@@ -216,17 +135,17 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
   bool _updateColors() {
     assert(mounted, 'This should only be called after didUpdateDependencies');
     bool changed = false;
-    final Color selectedColor = widget.selectedColor ?? Colors.blueAccent;
+    final Color selectedColor = widget.selectedColor ?? Colors.blue;
     if (_selectedColor != selectedColor) {
       changed = true;
       _selectedColor = selectedColor;
     }
-    final Color unselectedColor = widget.unselectedColor ?? Colors.red;
+    final Color unselectedColor = widget.unselectedColor ?? Colors.white;
     if (_unselectedColor != unselectedColor) {
       changed = true;
       _unselectedColor = unselectedColor;
     }
-    final Color borderColor = widget.borderColor ?? Colors.pink;
+    final Color borderColor = widget.borderColor ?? Colors.grey;
     if (_borderColor != borderColor) {
       changed = true;
       _borderColor = borderColor;
@@ -333,7 +252,7 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
 
   void _onTap(T currentKey) {
     if (currentKey != widget.selectionIndex && currentKey == _pressedKey) {
-      widget.onValueChanged(currentKey);
+      widget.onSegmentChosen(currentKey);
       _pressedKey = null;
     }
   }
@@ -418,7 +337,7 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
       splashColor: Colors.red,
       highlightColor: Colors.greenAccent,
       child: Padding(
-        padding: _kHorizontalItemPadding.resolve(Directionality.of(context)),
+        padding: _horizontalPadding.resolve(Directionality.of(context)),
         child: UnconstrainedBox(
           constrainedAxis: Axis.horizontal,
           child: box,
@@ -654,7 +573,7 @@ class _RenderSegmentedControl<T> extends RenderBox
 
   @override
   void performLayout() {
-    double maxHeight = _kMinSegmentedControlHeight;
+    double maxHeight = _minSegmentHeight;
 
     double childWidth = constraints.minWidth / childCount;
     for (RenderBox child in getChildrenAsList()) {
