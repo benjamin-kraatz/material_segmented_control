@@ -79,7 +79,8 @@ MaterialSegmentedControl(
 
 ### TODOs
 
-a) Provide a vertical divider between each item
+* Provide a vertical divider between each item
+* Little tooltip on long press showing a bite more detail for a segment
 
 ### Known issues
 
