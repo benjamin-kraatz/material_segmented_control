@@ -72,7 +72,8 @@ Map<int, Widget> _children() => {
 
 ### TODOs
 
-a) InkWell/Ripple effect
+* InkWell/Ripple effect
+* Tooltip showing a bit more details for a segment
 
 ### Known issues
 
