@@ -2,7 +2,7 @@
 
 A material segmented control like the one for iOS, in Material style.
 
-Now available in **version 2**!
+Now available in **version 2.1**! This version is also known as MSC Paw, because in this version, you can choose between an opaque color and a little sliding panel, a "paw".
 
 ![image](https://github.com/beagle-barks/material_segmented_control/blob/v2-0-x/images/20190624_235551.jpg "Preview")
 
