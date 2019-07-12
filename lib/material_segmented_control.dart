@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
+enum MSCType { NORMAL, PAW }
 // Horizontal padding for widget
 const EdgeInsets _horizontalPadding = EdgeInsets.symmetric(horizontal: 16.0);
 
@@ -35,6 +36,7 @@ const Duration _colorFadeDuration = Duration(milliseconds: 222);
 /// [selectedColor] and [unselectedColor] are set to [Colors.blue]
 /// and [Colors.white] when they are null and are not explicitly
 /// required but recommended to set for your needs.
+// ignore: must_be_immutable
 class MaterialSegmentedControl<T> extends StatefulWidget {
   MaterialSegmentedControl(
       {Key key,
@@ -53,6 +55,33 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
               children.keys.any((T child) => child == selectionIndex),
           'The groupValue must be either null or one of the keys in the children map.',
         ),
+        _mscType = MSCType.NORMAL,
+        pawElevation = 0,
+        pawMargin = 0,
+        pawColor = Colors.transparent,
+        super(key: key);
+
+  MaterialSegmentedControl.paw(
+      {Key key,
+      @required this.children,
+      @required this.onSegmentChosen,
+      this.selectionIndex,
+      this.borderColor,
+      this.pawMargin = 2.5,
+      this.pawColor = Colors.grey,
+      this.pawElevation = 1.0,
+      this.borderRadius = 32.0})
+      : assert(children != null),
+        assert(children.length >= 2),
+        assert(onSegmentChosen != null),
+        assert(
+          selectionIndex == null ||
+              children.keys.any((T child) => child == selectionIndex),
+          'The selectionIndex must be either null or one of the keys in the children map.',
+        ),
+        _mscType = MSCType.PAW,
+        selectedColor = Colors.white,
+        unselectedColor = Colors.blueAccent,
         super(key: key);
 
   /// The children to use. They need to live inside a [Map]
@@ -95,6 +124,20 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   ///
   /// Defaults to 32.0 if null
   final double borderRadius;
+
+  /// The kind how MSC is being displayed. [MSCType.NORMAL] causes
+  /// the control to draw an opaque color you can define, [MSCType.PAW]
+  /// displays a little sliding panel with or without elevation.
+  MSCType _mscType;
+
+  /// Foreground color for the paw, defaults to [Colors.grey]
+  final Color pawColor;
+
+  /// Elevation for the paw. Defaults to 1.0
+  final double pawElevation;
+
+  /// Paw margin
+  final double pawMargin;
 
   @override
   _SegmentedControlState<T> createState() => _SegmentedControlState<T>();
@@ -284,6 +327,10 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
           (widget.selectionIndex == currentKey) ? index : selectedIndex;
       pressedIndex = (_pressedKey == currentKey) ? index : pressedIndex;
 
+      bool firstItem = currentKey == widget.children.keys.elementAt(0);
+      bool lastItem = currentKey ==
+          widget.children.keys.elementAt(widget.children.length - 1);
+
       final TextStyle textStyle = DefaultTextStyle.of(context).style.copyWith(
             color: getTextColor(index, currentKey),
           );
@@ -291,11 +338,54 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
         color: getTextColor(index, currentKey),
       );
 
-      Widget child = Center(
-        child: Padding(
-            padding: EdgeInsets.symmetric(vertical: _verticalOffset),
-            child: widget.children[currentKey]),
-      );
+      Widget child = Stack(children: [
+        Center(
+          child: Padding(
+              padding: EdgeInsets.symmetric(vertical: _verticalOffset),
+              child: widget.children[currentKey]),
+        ),
+        widget._mscType == MSCType.PAW && selectedIndex == index
+            ? Column(
+                children: <Widget>[
+                  Expanded(
+                    child: Material(
+                      elevation: widget.pawElevation,
+                      child: Container(
+                        margin: EdgeInsets.all(widget.pawMargin),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(
+                              firstItem ? widget.borderRadius : 0,
+                            ),
+                            topRight: Radius.circular(
+                              lastItem ? widget.borderRadius : 0,
+                            ),
+                            bottomLeft: Radius.circular(
+                              firstItem ? widget.borderRadius : 0,
+                            ),
+                            bottomRight: Radius.circular(
+                              lastItem ? widget.borderRadius : 0,
+                            ),
+                          ),
+                          child: Opacity(
+                            opacity: 0.9,
+                            child: Container(
+                              color: Colors.grey,
+                              child: Column(
+                                children: <Widget>[
+                                  Flexible(child: widget.children[currentKey]),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            : Container(),
+      ]);
 
       child = GestureDetector(
         onTapDown: (TapDownDetails event) {

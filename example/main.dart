@@ -17,18 +17,38 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: MaterialSegmentedControl(
-          children: _children(),
-          selectionIndex: _currentSelection,
-          borderColor: Colors.grey,
-          selectedColor: Colors.redAccent,
-          unselectedColor: Colors.white,
-          borderRadius: 32.0,
-          onSegmentChosen: (index) {
-            setState(() {
-              _currentSelection = index;
-            });
-          },
+        child: Column(
+          children: <Widget>[
+            MaterialSegmentedControl(
+              children: _children(),
+              selectionIndex: _currentSelection,
+              borderColor: Colors.grey,
+              selectedColor: Colors.redAccent,
+              unselectedColor: Colors.white,
+              borderRadius: 32.0,
+              onSegmentChosen: (index) {
+                setState(() {
+                  _currentSelection = index;
+                });
+              },
+            ),
+            SizedBox(
+              height: 8.0,
+            ),
+            MaterialSegmentedControl.paw(
+              children: _children(),
+              selectionIndex: _currentSelection,
+              borderColor: Colors.grey,
+              pawColor: Colors.lightBlue,
+              pawElevation: 2.0,
+              borderRadius: 32.0,
+              onSegmentChosen: (index) {
+                setState(() {
+                  _currentSelection = index;
+                });
+              },
+            ),
+          ],
         ),
       ),
     );
