@@ -102,6 +102,11 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   ///
   /// Defaults to 16 if null
   final EdgeInsets horizontalPadding;
+  
+  // The vertical offset is used on top and bottom distance
+  ///
+  /// Defaults to 12 if null
+  final double verticalOffset;
 
   @override
   _SegmentedControlState<T> createState() => _SegmentedControlState<T>();
