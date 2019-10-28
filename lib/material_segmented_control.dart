@@ -36,19 +36,21 @@ const Duration _colorFadeDuration = Duration(milliseconds: 222);
 /// and [Colors.white] when they are null and are not explicitly
 /// required but recommended to set for your needs.
 class MaterialSegmentedControl<T> extends StatefulWidget {
-  MaterialSegmentedControl(
-      {Key key,
-      @required this.children,
-      @required this.onSegmentChosen,
-      this.selectionIndex,
-      this.unselectedColor,
-      this.selectedColor,
-      this.borderColor,
-      this.borderRadius = 32.0,
-      this.horizontalPadding = _horizontalPadding,})
-      : assert(children != null),
+  MaterialSegmentedControl({
+    Key key,
+    @required this.children,
+    @required this.onSegmentChosen,
+    @required this.unselectedColor,
+    @required this.selectedColor,
+    this.selectionIndex,
+    this.borderColor,
+    this.borderRadius = 32.0,
+    this.horizontalPadding = _horizontalPadding,
+  })  : assert(children != null),
         assert(children.length >= 2),
         assert(onSegmentChosen != null),
+        assert(selectedColor != null),
+        assert(unselectedColor != null),
         assert(
           selectionIndex == null ||
               children.keys.any((T child) => child == selectionIndex),
@@ -96,7 +98,7 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   ///
   /// Defaults to 32.0 if null
   final double borderRadius;
-  
+
   /// The horizontal padding to apply to the entire widget.
   ///
   /// Defaults to 16 if null
