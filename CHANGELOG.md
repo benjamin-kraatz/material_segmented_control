@@ -1,4 +1,4 @@
-## [2.0.3] - Updated `pubspec.yaml`
+## [2.0.4] - Fix: Issue #6
 
 * Fixed bug #6 - not setting selectedColor and unselectedColor causes the library to crash.
 
