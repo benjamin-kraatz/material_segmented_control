@@ -1,5 +1,9 @@
 ## [2.0.3] - Updated `pubspec.yaml`
 
+* Fixed bug #6 - not setting selectedColor and unselectedColor causes the library to crash.
+
+## [2.0.3] - Updated `pubspec.yaml`
+
 ## [2.0.2] - Minor fixes
 
 ## [2.0.1] - MSC v2!
