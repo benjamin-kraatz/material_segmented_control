@@ -1,3 +1,8 @@
+## [2.0.6] - More customization
+
+* Related to issue #4 you can now customize your widget in a better way.
+* Set the verticalOffset that controls the padding of a child.
+
 ## [2.0.5] - Fix: Issue #7 and InkWell ripple
 
 * Fixed issue #7 - MSC is now usable inside a CupertinoApp.

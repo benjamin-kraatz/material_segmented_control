@@ -44,7 +44,6 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
     @required this.selectedColor,
     this.selectionIndex,
     this.borderColor,
-    this.height,
     this.verticalOffset = 12.0,
     this.borderRadius = 32.0,
     this.horizontalPadding = _horizontalPadding,
@@ -101,14 +100,13 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   /// Defaults to 32.0 if null
   final double borderRadius;
 
-  /// Set the whole widgets height
-  final double height;
-
   /// The horizontal padding to apply to the entire widget.
   ///
   /// Defaults to 16 if null
   final EdgeInsets horizontalPadding;
 
+  /// The padding of a child, vertically.
+  /// You can use this to control the height of the widget in most cases.
   final double verticalOffset;
 
   @override
@@ -351,14 +349,11 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
 
     return Material(
       type: MaterialType.transparency,
-      child: Container(
-        height: widget.height,
-        child: Padding(
-          padding: widget.horizontalPadding.resolve(Directionality.of(context)),
-          child: UnconstrainedBox(
-            constrainedAxis: Axis.horizontal,
-            child: box,
-          ),
+      child: Padding(
+        padding: widget.horizontalPadding.resolve(Directionality.of(context)),
+        child: UnconstrainedBox(
+          constrainedAxis: Axis.horizontal,
+          child: box,
         ),
       ),
     );
