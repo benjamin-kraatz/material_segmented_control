@@ -341,14 +341,16 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
       borderRadius: widget.borderRadius,
     );
 
-    return InkWell(
-      splashColor: Colors.red,
-      highlightColor: Colors.greenAccent,
-      child: Padding(
-        padding: widget.horizontalPadding.resolve(Directionality.of(context)),
-        child: UnconstrainedBox(
-          constrainedAxis: Axis.horizontal,
-          child: box,
+    return Material(
+      child: InkWell(
+        splashColor: Colors.red,
+        highlightColor: Colors.greenAccent,
+        child: Padding(
+          padding: widget.horizontalPadding.resolve(Directionality.of(context)),
+          child: UnconstrainedBox(
+            constrainedAxis: Axis.horizontal,
+            child: box,
+          ),
         ),
       ),
     );
