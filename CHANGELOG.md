@@ -1,3 +1,5 @@
+## [2.0.7] - README.md: removed InkWell TODO
+
 ## [2.0.6] - More customization
 
 * Related to issue #4 you can now customize your widget in a better way.
