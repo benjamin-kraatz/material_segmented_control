@@ -44,6 +44,7 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
     @required this.selectedColor,
     this.selectionIndex,
     this.borderColor,
+    this.height,
     this.borderRadius = 32.0,
     this.horizontalPadding = _horizontalPadding,
   })  : assert(children != null),
@@ -98,6 +99,9 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   ///
   /// Defaults to 32.0 if null
   final double borderRadius;
+
+  /// Set the whole widgets height
+  final double height;
 
   /// The horizontal padding to apply to the entire widget.
   ///
@@ -346,11 +350,14 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
 
     return Material(
       type: MaterialType.transparency,
-      child: Padding(
-        padding: widget.horizontalPadding.resolve(Directionality.of(context)),
-        child: UnconstrainedBox(
-          constrainedAxis: Axis.horizontal,
-          child: box,
+      child: Container(
+        height: widget.height,
+        child: Padding(
+          padding: widget.horizontalPadding.resolve(Directionality.of(context)),
+          child: UnconstrainedBox(
+            constrainedAxis: Axis.horizontal,
+            child: box,
+          ),
         ),
       ),
     );
