@@ -1,3 +1,8 @@
+## [2.0.5] - Fix: Issue #7 and InkWell ripple
+
+* Fixed issue #7 - MSC is now usable inside a CupertinoApp.
+* InkWell ripple effect added; the Material styled ripple effect is seen on (long) tapping a segment. That makes the widget feel more like Material.
+
 ## [2.0.4] - Fix: Issue #6
 
 * Fixed bug #6 - not setting selectedColor and unselectedColor causes the library to crash.
