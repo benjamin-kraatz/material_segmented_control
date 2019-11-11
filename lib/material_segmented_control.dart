@@ -306,6 +306,7 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
       );
 
       child = InkWell(
+        borderRadius: _calculateBorderRadius(index),
         onTapDown: (TapDownDetails event) {
           _onTapDown(currentKey);
         },
@@ -355,6 +356,20 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
         ),
       ),
     );
+  }
+
+  BorderRadius _calculateBorderRadius(int index) {
+    return index == 0
+        ? BorderRadius.only(
+            topLeft: Radius.circular(widget.borderRadius),
+            bottomLeft: Radius.circular(widget.borderRadius),
+          )
+        : index == (widget.children.length - 1)
+            ? BorderRadius.only(
+                topRight: Radius.circular(widget.borderRadius),
+                bottomRight: Radius.circular(widget.borderRadius),
+              )
+            : null;
   }
 }
 
