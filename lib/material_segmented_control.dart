@@ -342,6 +342,7 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
     );
 
     return Material(
+      type: MaterialType.transparency,
       child: InkWell(
         splashColor: Colors.red,
         highlightColor: Colors.greenAccent,
