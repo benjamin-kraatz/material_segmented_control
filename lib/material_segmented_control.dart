@@ -306,6 +306,8 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
       );
 
       child = InkWell(
+        splashColor: widget.selectedColor.withOpacity(0.3),
+        highlightColor: widget.selectedColor.withOpacity(0.6),
         borderRadius: _calculateBorderRadius(index),
         onTapDown: (TapDownDetails event) {
           _onTapDown(currentKey);
@@ -344,15 +346,11 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
 
     return Material(
       type: MaterialType.transparency,
-      child: InkWell(
-        splashColor: Colors.red,
-        highlightColor: Colors.greenAccent,
-        child: Padding(
-          padding: widget.horizontalPadding.resolve(Directionality.of(context)),
-          child: UnconstrainedBox(
-            constrainedAxis: Axis.horizontal,
-            child: box,
-          ),
+      child: Padding(
+        padding: widget.horizontalPadding.resolve(Directionality.of(context)),
+        child: UnconstrainedBox(
+          constrainedAxis: Axis.horizontal,
+          child: box,
         ),
       ),
     );
