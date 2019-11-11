@@ -306,8 +306,8 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
       );
 
       child = InkWell(
-        splashColor: widget.selectedColor.withOpacity(0.3),
-        highlightColor: widget.selectedColor.withOpacity(0.6),
+        splashColor: widget.selectedColor.withOpacity(0.185),
+        highlightColor: widget.selectedColor.withOpacity(0.4),
         borderRadius: _calculateBorderRadius(index),
         onTapDown: (TapDownDetails event) {
           _onTapDown(currentKey);
