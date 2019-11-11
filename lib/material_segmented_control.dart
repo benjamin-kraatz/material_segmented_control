@@ -305,7 +305,7 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
             child: widget.children[currentKey]),
       );
 
-      child = GestureDetector(
+      child = InkWell(
         onTapDown: (TapDownDetails event) {
           _onTapDown(currentKey);
         },
