@@ -42,6 +42,7 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
     @required this.onSegmentChosen,
     @required this.unselectedColor,
     @required this.selectedColor,
+    this.disabledChildren,
     this.selectionIndex,
     this.borderColor,
     this.verticalOffset = 12.0,
@@ -108,6 +109,10 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   /// The padding of a child, vertically.
   /// You can use this to control the height of the widget in most cases.
   final double verticalOffset;
+
+  /// Define the children to disable.
+  /// Giving an empty list or null enables all children.
+  final List<T> disabledChildren;
 
   @override
   _SegmentedControlState<T> createState() => _SegmentedControlState<T>();
@@ -302,6 +307,11 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
         color: getTextColor(index, currentKey),
       );
 
+      final bool checkDisabledExist =
+          widget.disabledChildren != null && widget.disabledChildren.isNotEmpty;
+      final bool checkDisabledChild =
+          checkDisabledExist && widget.disabledChildren.contains(currentKey);
+
       Widget child = Center(
         child: Padding(
             padding: EdgeInsets.symmetric(vertical: widget.verticalOffset),
@@ -312,13 +322,17 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
         splashColor: widget.selectedColor.withOpacity(0.185),
         highlightColor: widget.selectedColor.withOpacity(0.4),
         borderRadius: _calculateBorderRadius(index),
-        onTapDown: (TapDownDetails event) {
-          _onTapDown(currentKey);
-        },
-        onTapCancel: _onTapCancel,
-        onTap: () {
-          _onTap(currentKey);
-        },
+        onTapDown: checkDisabledChild
+            ? null
+            : (TapDownDetails event) {
+                _onTapDown(currentKey);
+              },
+        onTapCancel: checkDisabledChild ? null : _onTapCancel,
+        onTap: checkDisabledChild
+            ? null
+            : () {
+                _onTap(currentKey);
+              },
         child: IconTheme(
           data: iconTheme,
           child: DefaultTextStyle(
