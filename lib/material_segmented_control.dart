@@ -36,6 +36,7 @@ const Duration _colorFadeDuration = Duration(milliseconds: 222);
 /// and [Colors.white] when they are null and are not explicitly
 /// required but recommended to set for your needs.
 class MaterialSegmentedControl<T> extends StatefulWidget {
+  /// Default disabledColor
   static const Color _kDisabledDefaultColor = Color(0xFFE0E0E0);
 
   MaterialSegmentedControl({
