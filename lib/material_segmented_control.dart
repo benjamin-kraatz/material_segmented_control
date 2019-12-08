@@ -47,7 +47,7 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
     this.borderColor,
     this.verticalOffset = 12.0,
     this.borderRadius = 32.0,
-    this.disabledColor = Colors.grey,
+    this.disabledColor = Colors.grey[300],
     this.horizontalPadding = _horizontalPadding,
   })  : assert(children != null),
         assert(
