@@ -18,12 +18,15 @@ class _MyAppState extends State<MyApp> {
     return Container(
       child: Center(
         child: MaterialSegmentedControl(
-          children: _children(),
+          children: _children,
           selectionIndex: _currentSelection,
           borderColor: Colors.grey,
           selectedColor: Colors.redAccent,
           unselectedColor: Colors.white,
-          borderRadius: 32.0,
+          borderRadius: 24.0,
+          disabledChildren: [
+            3,
+          ],
           onSegmentChosen: (index) {
             setState(() {
               _currentSelection = index;
@@ -34,10 +37,10 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Map<int, Widget> _children() => {
-        0: Text('Hummingbird'),
-        1: Text('Kiwi'),
-        2: Text('Rio'),
-        3: Text('Telluraves')
-      };
+  Map<int, Widget> _children = {
+    0: Text('Hummingbird'),
+    1: Text('Kiwi'),
+    2: Text('Rio'),
+    3: Text('Telluraves')
+  };
 }
