@@ -1,3 +1,8 @@
+## [2.0.8] - Disabled feature added
+
+* Fixed issue #9 - You can now set a list of disabled children
+* Disabled color defaults to Colors.grey (index 300).
+
 ## [2.0.7] - README.md: removed InkWell TODO
 
 ## [2.0.6] - More customization
