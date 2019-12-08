@@ -47,8 +47,13 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
     this.borderColor,
     this.verticalOffset = 12.0,
     this.borderRadius = 32.0,
+    this.disabledColor = Colors.grey,
     this.horizontalPadding = _horizontalPadding,
   })  : assert(children != null),
+        assert(
+            (disabledChildren != null && disabledChildren.isNotEmpty) &&
+                disabledColor != null,
+            'Do not set disabled color to null if disabled children are defined.'),
         assert(children.length >= 2),
         assert(onSegmentChosen != null),
         assert(selectedColor != null),
@@ -90,6 +95,10 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   ///
   /// [Colors.blue] by default if null
   final Color selectedColor;
+
+  /// The background color to use if a child is disabled
+  /// by [disabledChildren]. Defaults to [Colors.grey].
+  final Color disabledColor;
 
   /// Color used as border color.
   ///
@@ -347,7 +356,9 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
         ),
       );
 
-      _backgroundColors.add(getBackgroundColor(index, currentKey));
+      _backgroundColors.add(checkDisabledChild
+          ? widget.disabledColor
+          : getBackgroundColor(index, currentKey));
       _gestureChildren.add(child);
       index += 1;
     }
