@@ -1,3 +1,7 @@
+## [2.0.9] - Disabled feature
+
+* Disabled feature is now stable. Set children to be disabled with `disabledChildren`.
+
 ## [2.0.8] - Disabled feature added
 
 * Fixed issue #9 - You can now set a list of disabled children
