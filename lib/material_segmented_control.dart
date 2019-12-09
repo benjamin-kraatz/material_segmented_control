@@ -54,11 +54,9 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
     this.horizontalPadding = _horizontalPadding,
   })  : assert(children != null),
         assert(
-            (((disabledChildren == null || disabledChildren.isEmpty) &&
-                    disabledColor == null) ||
-                ((disabledChildren != null && disabledChildren.isNotEmpty) &&
-                    disabledColor != null)),
-            'Do not set disabled color to null if disabled children are defined.'),
+            (disabledChildren == null ||
+                (disabledColor != null && disabledChildren != null)),
+            'Do not set disabled color to null if you have disabled children!'),
         assert(children.length >= 2),
         assert(onSegmentChosen != null),
         assert(selectedColor != null),
