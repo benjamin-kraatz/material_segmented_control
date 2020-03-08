@@ -1,3 +1,7 @@
+## [2.0.10]
+
+* Removed deprecated `author` field from pubspec.yaml
+
 ## [2.0.9] - Disabled feature
 
 * Disabled feature is now stable. Set children to be disabled with `disabledChildren`.
