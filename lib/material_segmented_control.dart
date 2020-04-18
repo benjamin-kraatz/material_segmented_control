@@ -389,11 +389,9 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
 
   BorderRadius _calculateBorderRadius(int index) {
     if (widget.children.length == 1) {
-      return
-        BorderRadius.all(Radius.circular(widget.borderRadius));
+      return BorderRadius.all(Radius.circular(widget.borderRadius));
     } else {
-      return
-        index == 0
+      return index == 0
           ? BorderRadius.only(
               topLeft: Radius.circular(widget.borderRadius),
               bottomLeft: Radius.circular(widget.borderRadius),
@@ -616,19 +614,23 @@ class _RenderSegmentedControl<T> extends RenderBox
           Rect.fromLTWH(start, 0.0, child.size.width, child.size.height);
       RRect rChildRect;
       if (child == leftChild && child == rightChild) {
-        rChildRect = RRect.fromRectAndCorners(childRect,
-            topLeft: Radius.circular(_borderRadius),
-            topRight: Radius.circular(_borderRadius),
-            bottomLeft: Radius.circular(_borderRadius),
-            bottomRight: Radius.circular(_borderRadius));
+        rChildRect = RRect.fromRectAndCorners(
+          childRect,
+          topLeft: Radius.circular(_borderRadius),
+          topRight: Radius.circular(_borderRadius),
+          bottomLeft: Radius.circular(_borderRadius),
+          bottomRight: Radius.circular(_borderRadius),
+        );
       } else if (child == leftChild) {
         rChildRect = RRect.fromRectAndCorners(childRect,
             topLeft: Radius.circular(_borderRadius),
             bottomLeft: Radius.circular(_borderRadius));
       } else if (child == rightChild) {
-        rChildRect = RRect.fromRectAndCorners(childRect,
-            topRight: Radius.circular(_borderRadius),
-            bottomRight: Radius.circular(_borderRadius));
+        rChildRect = RRect.fromRectAndCorners(
+          childRect,
+          topRight: Radius.circular(_borderRadius),
+          bottomRight: Radius.circular(_borderRadius),
+        );
       } else {
         rChildRect = RRect.fromRectAndCorners(childRect);
       }

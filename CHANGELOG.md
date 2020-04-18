@@ -1,3 +1,7 @@
+## 2.0.11+1
+
+* Children can now have a length of 1 also - thanks to **dttrinh** for contribution!
+
 ## [2.0.11]
 
 * Fixed `example/main.dart` issue #11 - added `Scaffold` on top of the tree
