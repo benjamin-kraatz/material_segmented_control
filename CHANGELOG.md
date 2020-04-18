@@ -1,3 +1,7 @@
+## [2.0.11]
+
+* Fixed `example/main.dart` issue #11 - added `Scaffold` on top of the tree
+
 ## [2.0.10]
 
 * Removed deprecated `author` field from pubspec.yaml
