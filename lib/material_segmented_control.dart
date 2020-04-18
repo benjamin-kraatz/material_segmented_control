@@ -57,7 +57,7 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
             (disabledChildren == null ||
                 (disabledColor != null && disabledChildren != null)),
             'Do not set disabled color to null if you have disabled children!'),
-        assert(children.length >= 2),
+        assert(children.length >= 1),
         assert(onSegmentChosen != null),
         assert(selectedColor != null),
         assert(unselectedColor != null),
@@ -388,17 +388,23 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
   }
 
   BorderRadius _calculateBorderRadius(int index) {
-    return index == 0
-        ? BorderRadius.only(
-            topLeft: Radius.circular(widget.borderRadius),
-            bottomLeft: Radius.circular(widget.borderRadius),
-          )
-        : index == (widget.children.length - 1)
-            ? BorderRadius.only(
-                topRight: Radius.circular(widget.borderRadius),
-                bottomRight: Radius.circular(widget.borderRadius),
-              )
-            : null;
+    if (widget.children.length == 1) {
+      return
+        BorderRadius.all(Radius.circular(widget.borderRadius));
+    } else {
+      return
+        index == 0
+          ? BorderRadius.only(
+              topLeft: Radius.circular(widget.borderRadius),
+              bottomLeft: Radius.circular(widget.borderRadius),
+            )
+          : index == (widget.children.length - 1)
+              ? BorderRadius.only(
+                  topRight: Radius.circular(widget.borderRadius),
+                  bottomRight: Radius.circular(widget.borderRadius),
+                )
+              : null;
+    }
   }
 }
 
@@ -609,7 +615,13 @@ class _RenderSegmentedControl<T> extends RenderBox
       final Rect childRect =
           Rect.fromLTWH(start, 0.0, child.size.width, child.size.height);
       RRect rChildRect;
-      if (child == leftChild) {
+      if (child == leftChild && child == rightChild) {
+        rChildRect = RRect.fromRectAndCorners(childRect,
+            topLeft: Radius.circular(_borderRadius),
+            topRight: Radius.circular(_borderRadius),
+            bottomLeft: Radius.circular(_borderRadius),
+            bottomRight: Radius.circular(_borderRadius));
+      } else if (child == leftChild) {
         rChildRect = RRect.fromRectAndCorners(childRect,
             topLeft: Radius.circular(_borderRadius),
             bottomLeft: Radius.circular(_borderRadius));
