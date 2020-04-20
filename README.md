@@ -69,6 +69,8 @@ Map<int, Widget> _children = {
 ```
 
 
+> **PLEASE NOTE: When using this in Flutter Web, it may cause rendering problems. This is probably a problem with the Flutter Web framework and may be fixed in the future. There is already an issue available; feel free to discuss [here](https://github.com/beagle-barks/material_segmented_control/issues/13)**
+
 ### Documentation
 
 Open [the wiki](https://github.com/beagle-barks/material_segmented_control/wiki) to see the documentation
