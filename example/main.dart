@@ -80,6 +80,7 @@ class _MyAppState extends State<MyApp> {
   };
 
   // Holds all indices of children to be disabled.
+  // Set this list either null or empty to have no children disabled.
   List<int> _disabledIndices = [];
 
   int _randomInt() {
