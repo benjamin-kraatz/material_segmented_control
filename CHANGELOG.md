@@ -1,3 +1,7 @@
+## 2.1.0+1
+
+Extended README.md to explain key features and referenced the example project.
+
 ## 2.1.0
 
 Massively improved `example` project. The following features were introduced there to showcase this package:

@@ -25,7 +25,7 @@ In your `pubspec.yaml`, add
 
 ```dart
 dependencies: 
-    material_segmented_control: ^2.0.11
+    material_segmented_control: ^2.1.0
 ```
 
 
@@ -70,6 +70,15 @@ Map<int, Widget> _children = {
 
 
 > **PLEASE NOTE: When using this in Flutter Web, it may cause rendering problems. This is probably a problem with the Flutter Web framework and may be fixed in the future. There is already an issue available; feel free to discuss [here](https://github.com/beagle-barks/material_segmented_control/issues/13)**
+
+
+### Features
+
+* Disable the selection for all children by setting `selectionIndex` to `null`. It un-selects all options.
+* Disable children to being not "clickable" (like setting `onPressed` to null on a button) by setting `disabledChildren`. Give it a list with all indices that should be disabled. Give it either null or an empty list to not use the disabled feature.
+
+
+> I highly recommend to check out the [example project](https://github.com/beagle-barks/material_segmented_control/tree/master/example)!
 
 ### Documentation
 
