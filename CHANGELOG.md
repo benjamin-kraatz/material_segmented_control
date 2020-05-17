@@ -1,3 +1,10 @@
+## 2.1.0
+
+Massively improved `example` project. The following features were introduced there to showcase this package:
+
+* "Toggle Disabled" button: shows the use of disabled children
+* "Un-select all" button: Lets you clear the selection of all children
+
 ## 2.0.11+1
 
 * Children can now have a length of 1 also - thanks to **dttrinh** for contribution!
