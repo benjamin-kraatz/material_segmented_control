@@ -17,24 +17,37 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Container(
-          child: Center(
-            child: MaterialSegmentedControl(
-              children: _children,
-              selectionIndex: _currentSelection,
-              borderColor: Colors.grey,
-              selectedColor: Colors.redAccent,
-              unselectedColor: Colors.white,
-              borderRadius: 24.0,
-              disabledChildren: [
-                3,
-              ],
-              onSegmentChosen: (index) {
-                setState(() {
-                  _currentSelection = index;
-                });
-              },
-            ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              MaterialSegmentedControl(
+                children: _children,
+                selectionIndex: _currentSelection,
+                borderColor: Colors.grey,
+                selectedColor: Colors.redAccent,
+                unselectedColor: Colors.white,
+                borderRadius: 8.0,
+                disabledChildren: [
+                  3,
+                ],
+                onSegmentChosen: (index) {
+                  setState(() {
+                    _currentSelection = index;
+                  });
+                },
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              RaisedButton(
+                child: Text('Un-select all'),
+                color: Colors.blue,
+                textColor: Colors.white,
+                onPressed: () => setState(() => _currentSelection = null),
+              ),
+            ],
           ),
         ),
       ),
