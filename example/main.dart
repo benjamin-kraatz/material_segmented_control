@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 
@@ -29,9 +31,7 @@ class _MyAppState extends State<MyApp> {
                 selectedColor: Colors.redAccent,
                 unselectedColor: Colors.white,
                 borderRadius: 8.0,
-                disabledChildren: [
-                  3,
-                ],
+                disabledChildren: _disabledIndices,
                 onSegmentChosen: (index) {
                   setState(() {
                     _currentSelection = index;
@@ -41,11 +41,29 @@ class _MyAppState extends State<MyApp> {
               SizedBox(
                 height: 8,
               ),
-              RaisedButton(
-                child: Text('Un-select all'),
-                color: Colors.blue,
-                textColor: Colors.white,
-                onPressed: () => setState(() => _currentSelection = null),
+              ButtonBar(
+                alignment: MainAxisAlignment.center,
+                children: [
+                  RaisedButton(
+                    child: Text('Toggle disabled'),
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    onPressed: () {
+                      // This is just an example on how disabled children work.
+                      // A disabled index is determined randomly.
+                      setState(() {
+                        _disabledIndices.clear();
+                        _disabledIndices.add(_randomInt());
+                      });
+                    },
+                  ),
+                  RaisedButton(
+                    child: Text('Un-select all'),
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    onPressed: () => setState(() => _currentSelection = null),
+                  ),
+                ],
               ),
             ],
           ),
@@ -60,4 +78,11 @@ class _MyAppState extends State<MyApp> {
     2: Text('Rio'),
     3: Text('Telluraves')
   };
+
+  // Holds all indices of children to be disabled.
+  List<int> _disabledIndices = [];
+
+  int _randomInt() {
+    return Random.secure().nextInt(_children.length);
+  }
 }
