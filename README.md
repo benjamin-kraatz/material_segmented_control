@@ -5,7 +5,6 @@ A material segmented control like the one for iOS, in Material style.
 
 ![image](https://github.com/beagle-barks/material_segmented_control/blob/v2-0-x/images/20190624_235551.jpg "Preview")
 
-To see TODOs, upcoming features and known issues, got to **[In the future section](https://github.com/beagle-barks/material_segmented_control#in-the-future)**
 
 
 ## Why?
@@ -70,16 +69,7 @@ Map<int, Widget> _children = {
 ```
 
 
-## In the future
-
-### TODOs
-
-* Tooltip showing a bit more details for a segment
-
-### Known issues
-
-> Currently there are no known issues. Yey!
-
+> **PLEASE NOTE: When using this in Flutter Web, it may cause rendering problems. This is probably a problem with the Flutter Web framework and may be fixed in the future. There is already an issue available; feel free to discuss [here](https://github.com/beagle-barks/material_segmented_control/issues/13)**
 
 ### Documentation
 
