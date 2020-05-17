@@ -15,24 +15,26 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Center(
-          child: MaterialSegmentedControl(
-            children: _children,
-            selectionIndex: _currentSelection,
-            borderColor: Colors.grey,
-            selectedColor: Colors.redAccent,
-            unselectedColor: Colors.white,
-            borderRadius: 24.0,
-            disabledChildren: [
-              3,
-            ],
-            onSegmentChosen: (index) {
-              setState(() {
-                _currentSelection = index;
-              });
-            },
+    return MaterialApp(
+      home: Scaffold(
+        body: Container(
+          child: Center(
+            child: MaterialSegmentedControl(
+              children: _children,
+              selectionIndex: _currentSelection,
+              borderColor: Colors.grey,
+              selectedColor: Colors.redAccent,
+              unselectedColor: Colors.white,
+              borderRadius: 24.0,
+              disabledChildren: [
+                3,
+              ],
+              onSegmentChosen: (index) {
+                setState(() {
+                  _currentSelection = index;
+                });
+              },
+            ),
           ),
         ),
       ),
