@@ -3,6 +3,7 @@ description: Showcases the use of Material Segmented Control widget
 version: 1.0.0
 author: The.BENN<beagle-barks-contact@yahoo.com>
 homepage: https://github.com/beagle-barks/material_segmented_control
+publish_to: none
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
