@@ -1,3 +1,7 @@
+## 3.0.0-nullsafety.0
+
+* Added null safety to the core library and example project
+
 ## 2.1.0+1
 
 Extended README.md to explain key features and referenced the example project.
