@@ -1,3 +1,9 @@
+## 2.1.1+1
+
+* Changed an insecure URL in the README.md to an https URL that links to the pub.dev page of this package.
+* Fixed a wrong placed file in the `example` project
+* Added `publish_to` to the example project's `pubspec.yaml` file.
+
 ## 2.1.0+1
 
 Extended README.md to explain key features and referenced the example project.
