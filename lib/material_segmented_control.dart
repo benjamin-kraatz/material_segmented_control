@@ -163,12 +163,12 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
   bool _updateColors() {
     assert(mounted, 'This should only be called after didUpdateDependencies');
     bool changed = false;
-    final Color selectedColor = widget.selectedColor ?? Colors.blue;
+    final Color selectedColor = widget.selectedColor;
     if (_selectedColor != selectedColor) {
       changed = true;
       _selectedColor = selectedColor;
     }
-    final Color unselectedColor = widget.unselectedColor ?? Colors.white;
+    final Color unselectedColor = widget.unselectedColor;
     if (_unselectedColor != unselectedColor) {
       changed = true;
       _unselectedColor = unselectedColor;
