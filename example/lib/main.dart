@@ -44,10 +44,12 @@ class _MyAppState extends State<MyApp> {
               ButtonBar(
                 alignment: MainAxisAlignment.center,
                 children: [
-                  RaisedButton(
-                    child: Text('Toggle disabled'),
-                    color: Colors.blue,
-                    textColor: Colors.white,
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.blue,
+                    ),
+                    child: Text('Toggle disabled',
+                        style: const TextStyle(color: Colors.white)),
                     onPressed: () {
                       // This is just an example on how disabled children work.
                       // A disabled index is determined randomly.
@@ -57,10 +59,12 @@ class _MyAppState extends State<MyApp> {
                       });
                     },
                   ),
-                  RaisedButton(
-                    child: Text('Un-select all'),
-                    color: Colors.blue,
-                    textColor: Colors.white,
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.blue,
+                    ),
+                    child: Text('Un-select all',
+                        style: const TextStyle(color: Colors.white)),
                     onPressed: () => setState(() => _currentSelection = null),
                   ),
                 ],
