@@ -1,3 +1,14 @@
+## 3.1.0
+
+* Added `nullsafety` to the project
+* **CHANGES:**
+    - `selectedColor`, `disabledColor` and `disabledColor` are no longer required and use default values
+    - `onSegmentChosen` is no longer required and can be null. This has no effect so that you need to set `disabledChildren` in case you want disabled children (means the "ripple" effect on tap still exists)
+    - Example project now uses `ElevatedButton` instead of deprecated `RaisedButton`
+    
+* **FIX:**
+    - `??` is no longer used on non-nullable values
+
 ## 2.1.1+1
 
 * Changed an insecure URL in the README.md to an https URL that links to the pub.dev page of this package.
@@ -17,7 +28,7 @@ Massively improved `example` project. The following features were introduced the
 
 ## 2.0.11+1
 
-* Children can now have a length of 1 also - thanks to **dttrinh** for contribution!
+* Children can now have a length of 1
 
 ## [2.0.11]
 
