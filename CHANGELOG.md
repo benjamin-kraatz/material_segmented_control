@@ -1,3 +1,8 @@
+## 3.1.2
+
+* `x.y.z+B` versioning changed to `x.y.z` scheme
+
+
 ## 3.1.1+4
 
 * Fixed some static analysis issues (non-nullable types can never be null)
