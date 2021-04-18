@@ -465,9 +465,7 @@ class _RenderSegmentedControl<T> extends RenderBox
     required List<Color?> backgroundColors,
     required Color? borderColor,
     required double borderRadius,
-  })   : assert(textDirection != null),
-        assert(borderRadius != null),
-        _textDirection = textDirection,
+  })   : _textDirection = textDirection,
         _selectedIndex = selectedIndex,
         _pressedIndex = pressedIndex,
         _backgroundColors = backgroundColors,
@@ -698,8 +696,6 @@ class _RenderSegmentedControl<T> extends RenderBox
 
   void _paintChild(
       PaintingContext context, Offset offset, RenderBox child, int childIndex) {
-    assert(child != null);
-
     final _SegmentedControlContainerBoxParentData childParentData =
         child.parentData as _SegmentedControlContainerBoxParentData;
 
@@ -722,7 +718,6 @@ class _RenderSegmentedControl<T> extends RenderBox
 
   @override
   bool hitTestChildren(HitTestResult result, {required Offset position}) {
-    assert(position != null);
     RenderBox? child = lastChild;
     while (child != null) {
       final _SegmentedControlContainerBoxParentData childParentData =

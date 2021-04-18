@@ -1,3 +1,8 @@
+## 3.1.1+4
+
+* Fixed some static analysis issues (non-nullable types can never be null)
+
+
 ## 3.1.0+3
 
 * Added `nullsafety` to the project
