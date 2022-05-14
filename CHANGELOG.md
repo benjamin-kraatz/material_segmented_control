@@ -1,3 +1,9 @@
+## 4.0.0
+
+* `Flutter 3` and `Dart 2.17` updates
+* Added Material 3 opt-in to the example app
+
+
 ## 3.1.2
 
 * `x.y.z+B` versioning changed to `x.y.z` scheme
