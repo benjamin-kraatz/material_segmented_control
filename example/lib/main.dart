@@ -18,6 +18,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
       home: Scaffold(
         body: Center(
           child: Column(
@@ -30,8 +33,9 @@ class _MyAppState extends State<MyApp> {
                 borderColor: Colors.grey,
                 selectedColor: Colors.redAccent,
                 unselectedColor: Colors.white,
-                borderRadius: 8.0,
+                borderRadius: 6.0,
                 disabledChildren: _disabledIndices,
+                verticalOffset: 8.0,
                 onSegmentChosen: (index) {
                   setState(() {
                     _currentSelection = index;
@@ -41,15 +45,11 @@ class _MyAppState extends State<MyApp> {
               SizedBox(
                 height: 8,
               ),
-              ButtonBar(
-                alignment: MainAxisAlignment.center,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
                     child: Text('Toggle disabled'),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.blue,
-                      textStyle: TextStyle(color: Colors.white),
-                    ),
                     onPressed: () {
                       // This is just an example on how disabled children work.
                       // A disabled index is determined randomly.
@@ -59,12 +59,9 @@ class _MyAppState extends State<MyApp> {
                       });
                     },
                   ),
+                  const SizedBox(width: 8),
                   ElevatedButton(
                     child: Text('Un-select all'),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.blue,
-                      textStyle: TextStyle(color: Colors.white),
-                    ),
                     onPressed: () => setState(() => _currentSelection = null),
                   ),
                 ],
@@ -77,10 +74,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   Map<int, Widget> _children = {
-    0: Text('Hummingbird'),
-    1: Text('Kiwi'),
-    2: Text('Rio'),
-    3: Text('Telluraves')
+    0: Text('Flutter'),
+    1: Text('Dart'),
+    2: Text('Desktop'),
+    3: Text('Mobile'),
+    4: Text('Web')
   };
 
   // Holds all indices of children to be disabled.
