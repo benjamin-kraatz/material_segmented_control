@@ -48,6 +48,8 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
     this.borderColor,
     this.verticalOffset = 12.0,
     this.borderRadius = 32.0,
+    this.selectedTextStyle,
+    this.unselectedTextStyle,
     this.selectedColor = _kSelectedDefaultColor,
     this.disabledColor = _kDisabledDefaultColor,
     this.unselectedColor = _kUnselectedDefaultColor,
@@ -80,6 +82,16 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
 
   /// The callback to use when a segmented item is chosen
   final ValueChanged<T>? onSegmentChosen;
+
+  /// Selected text style.
+  ///
+  /// [Colors.white] by default if null
+  final TextStyle? selectedTextStyle;
+
+  /// Unselected text style.
+  ///
+  /// [selectedColor] by default if null
+  final TextStyle? unselectedTextStyle;
 
   /// Unselected color.
   ///
@@ -140,6 +152,8 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
   Color? _unselectedTextColor;
   Color? _borderColor;
   Color? _pressedColor;
+  TextStyle? _selectedTextStyle;
+  TextStyle? _unselectedTextStyle;
 
   AnimationController createAnimationController() {
     return AnimationController(
@@ -174,6 +188,16 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
     if (_pressedColor != pressedColor) {
       changed = true;
       _pressedColor = pressedColor;
+    }
+    final TextStyle selectedTextStyle = widget.selectedTextStyle ?? TextStyle(color: _unselectedColor);
+    if (_selectedTextStyle != selectedTextStyle) {
+      changed = true;
+      _selectedTextStyle = selectedTextStyle;
+    }
+    final TextStyle unselectedTextStyle = widget.unselectedTextStyle ?? TextStyle(color: _selectedColor);
+    if (_unselectedTextStyle != unselectedTextStyle) {
+      changed = true;
+      _unselectedTextStyle = unselectedTextStyle;
     }
 
     _selectedTextColor = _selectedColor;
@@ -277,6 +301,11 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
     }
   }
 
+  TextStyle? getTextStyle(int index, T currentKey) {
+    if (widget.selectionIndex == currentKey) return _selectedTextStyle;
+    return _unselectedTextStyle;
+  }
+
   Color? getTextColor(int index, T currentKey) {
     if (_selectionControllers[index].isAnimating)
       return _textColorTween.evaluate(_selectionControllers[index]);
@@ -304,9 +333,10 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
           (widget.selectionIndex == currentKey) ? index : selectedIndex;
       pressedIndex = (_pressedKey == currentKey) ? index : pressedIndex;
 
-      final TextStyle textStyle = DefaultTextStyle.of(context).style.copyWith(
-            color: getTextColor(index, currentKey),
-          );
+      final TextStyle textStyle = getTextStyle(index, currentKey) ??
+          DefaultTextStyle.of(context).style.copyWith(
+                color: getTextColor(index, currentKey),
+              );
       final IconThemeData iconTheme = IconThemeData(
         color: getTextColor(index, currentKey),
       );
