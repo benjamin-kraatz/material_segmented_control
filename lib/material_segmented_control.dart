@@ -195,12 +195,14 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
       changed = true;
       _pressedColor = pressedColor;
     }
-    final TextStyle selectedTextStyle = widget.selectedTextStyle ?? TextStyle(color: _unselectedColor);
+    final TextStyle selectedTextStyle =
+        widget.selectedTextStyle ?? TextStyle(color: _unselectedColor);
     if (_selectedTextStyle != selectedTextStyle) {
       changed = true;
       _selectedTextStyle = selectedTextStyle;
     }
-    final TextStyle unselectedTextStyle = widget.unselectedTextStyle ?? TextStyle(color: _selectedColor);
+    final TextStyle unselectedTextStyle =
+        widget.unselectedTextStyle ?? TextStyle(color: _selectedColor);
     if (_unselectedTextStyle != unselectedTextStyle) {
       changed = true;
       _unselectedTextStyle = unselectedTextStyle;
@@ -505,7 +507,7 @@ class _RenderSegmentedControl<T> extends RenderBox
     required Color? borderColor,
     required double borderRadius,
     required double borderWidth,
-  })   : _textDirection = textDirection,
+  })  : _textDirection = textDirection,
         _selectedIndex = selectedIndex,
         _pressedIndex = pressedIndex,
         _backgroundColors = backgroundColors,
