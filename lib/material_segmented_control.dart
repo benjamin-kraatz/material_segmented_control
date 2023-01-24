@@ -566,10 +566,10 @@ class _RenderSegmentedControl<T> extends RenderBox
     markNeedsPaint();
   }
 
-  double? get borderWidth => _borderWidth;
-  double? _borderWidth;
+  double get borderWidth => _borderWidth;
+  double _borderWidth;
 
-  set borderWidth(double? value) {
+  set borderWidth(double value) {
     if (_borderWidth == value) {
       return;
     }
@@ -761,7 +761,7 @@ class _RenderSegmentedControl<T> extends RenderBox
       childParentData.surroundingRect.shift(offset),
       Paint()
         ..color = borderColor!
-        ..strokeWidth = borderWidth!
+        ..strokeWidth = borderWidth
         ..style = PaintingStyle.stroke,
     );
 
