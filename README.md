@@ -51,6 +51,7 @@ MaterialSegmentedControl(
           unselectedColor: Colors.white,
           selectedTextStyle: TextStyle(color: Colors.white),
           unselectedTextStyle: TextStyle(color: Colors.redAccent),
+          borderWidth: 0.7,
           borderRadius: 32.0,
           disabledChildren: [
             3,

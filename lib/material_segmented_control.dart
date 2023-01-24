@@ -48,6 +48,7 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
     this.borderColor,
     this.verticalOffset = 12.0,
     this.borderRadius = 32.0,
+    this.borderWidth = 0.7,
     this.selectedTextStyle,
     this.unselectedTextStyle,
     this.selectedColor = _kSelectedDefaultColor,
@@ -116,6 +117,11 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   ///
   /// Defaults to 32.0 if null
   final double borderRadius;
+
+  /// The border width used on entire widget.
+  ///
+  /// Defaults to 0.7 if null
+  final double borderWidth;
 
   /// The horizontal padding to apply to the entire widget.
   ///
@@ -395,6 +401,7 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
       backgroundColors: _backgroundColors,
       borderColor: _borderColor,
       borderRadius: widget.borderRadius,
+      borderWidth: widget.borderWidth,
     );
 
     return Material(
@@ -437,6 +444,7 @@ class _SegmentedControlRenderWidget<T> extends MultiChildRenderObjectWidget {
     required this.backgroundColors,
     required this.borderColor,
     required this.borderRadius,
+    required this.borderWidth,
   }) : super(
           key: key,
           children: children,
@@ -447,6 +455,7 @@ class _SegmentedControlRenderWidget<T> extends MultiChildRenderObjectWidget {
   final List<Color?> backgroundColors;
   final Color? borderColor;
   final double borderRadius;
+  final double borderWidth;
 
   @override
   RenderObject createRenderObject(BuildContext context) {
@@ -457,6 +466,7 @@ class _SegmentedControlRenderWidget<T> extends MultiChildRenderObjectWidget {
       backgroundColors: backgroundColors,
       borderColor: borderColor,
       borderRadius: borderRadius,
+      borderWidth: borderWidth,
     );
   }
 
@@ -468,7 +478,8 @@ class _SegmentedControlRenderWidget<T> extends MultiChildRenderObjectWidget {
       ..selectedIndex = selectedIndex
       ..pressedIndex = pressedIndex
       ..backgroundColors = backgroundColors
-      ..borderColor = borderColor;
+      ..borderColor = borderColor
+      ..borderWidth = borderWidth;
   }
 }
 
@@ -493,12 +504,14 @@ class _RenderSegmentedControl<T> extends RenderBox
     required List<Color?> backgroundColors,
     required Color? borderColor,
     required double borderRadius,
+    required double borderWidth,
   })   : _textDirection = textDirection,
         _selectedIndex = selectedIndex,
         _pressedIndex = pressedIndex,
         _backgroundColors = backgroundColors,
         _borderColor = borderColor,
-        _borderRadius = borderRadius {
+        _borderRadius = borderRadius,
+        _borderWidth = borderWidth {
     addAll(children);
   }
 
@@ -550,6 +563,17 @@ class _RenderSegmentedControl<T> extends RenderBox
       return;
     }
     _borderColor = value;
+    markNeedsPaint();
+  }
+
+  double get borderWidth => _borderWidth;
+  double _borderWidth;
+
+  set borderWidth(double value) {
+    if (_borderWidth == value) {
+      return;
+    }
+    _borderWidth = value;
     markNeedsPaint();
   }
 
@@ -737,7 +761,7 @@ class _RenderSegmentedControl<T> extends RenderBox
       childParentData.surroundingRect.shift(offset),
       Paint()
         ..color = borderColor!
-        ..strokeWidth = 0.7
+        ..strokeWidth = borderWidth
         ..style = PaintingStyle.stroke,
     );
 

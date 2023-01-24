@@ -14,6 +14,9 @@ MaterialSegmentedControl(
           borderColor: Colors.grey,
           selectedColor: Colors.redAccent,
           unselectedColor: Colors.white,
+          selectedTextStyle: TextStyle(color: Colors.white),
+          unselectedTextStyle: TextStyle(color: Colors.redAccent),
+          borderWidth: 0.7,
           borderRadius: 32.0,
           onSegmentChosen: (index) {
             setState(() {
