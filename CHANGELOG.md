@@ -1,3 +1,8 @@
+## 4.1.0
+
+* Add support for setting customs `textStyle`s and a `borderWidth` for the entire widget (thanks to **@[chayanforyou](https://github.com/chayanforyou)**)
+
+
 ## 4.0.0
 
 * `Flutter 3` and `Dart 2.17` updates
