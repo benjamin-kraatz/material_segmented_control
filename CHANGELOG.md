@@ -1,4 +1,4 @@
-## 4.1.0
+## 4.1.1
 
 * Add support for setting customs `textStyle`s and a `borderWidth` for the entire widget (thanks to **@[chayanforyou](https://github.com/chayanforyou)**)
 
