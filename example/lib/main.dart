@@ -35,6 +35,7 @@ class _MyAppState extends State<MyApp> {
                 unselectedColor: Colors.white,
                 selectedTextStyle: TextStyle(color: Colors.white),
                 unselectedTextStyle: TextStyle(color: Colors.redAccent),
+                borderWidth: 0.7,
                 borderRadius: 6.0,
                 disabledChildren: _disabledIndices,
                 verticalOffset: 8.0,
