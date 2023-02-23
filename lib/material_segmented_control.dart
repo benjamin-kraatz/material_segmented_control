@@ -22,7 +22,7 @@ const Duration _colorFadeDuration = Duration(milliseconds: 222);
 /// You can use any [Widget] to make it a segmented item. Simply
 /// define a [Map] with indices.
 ///
-/// [onSegmentChosen] is called whenever a segmented item is clicked.
+/// [onSegmentTapped] is called whenever a segmented item is clicked.
 /// You need to pass it to [selectionIndex] to tell MSC what index
 /// is currently selected. Make sure to update it via [setState].
 ///
@@ -42,7 +42,9 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   MaterialSegmentedControl({
     Key? key,
     required this.children,
-    this.onSegmentChosen,
+    @Deprecated('This will be removed in later versions. Use [onSegmentTapped] instead')
+        this.onSegmentChosen,
+    this.onSegmentTapped,
     this.disabledChildren,
     this.selectionIndex,
     this.borderColor,
@@ -78,11 +80,22 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   final Map<T, Widget> children;
 
   /// Currently selected item index. Make sure to pass the value
-  /// from [onSegmentChosen] to see the selection state.
+  /// from [onSegmentTapped] to see the selection state.
   final T? selectionIndex;
 
-  /// The callback to use when a segmented item is chosen
+  /// The callback to use when a segmented item is chosen.
+  ///
+  /// This is deprecated: use [onSegmentTapped] instead.
+  /// If you provide both, only [onSegmentChosen] will be called.
+  @Deprecated(
+      'This will be removed in later versions. Use [onSegmentTapped] instead')
   final ValueChanged<T>? onSegmentChosen;
+
+  /// The callback to use when a segmented item is tapped
+  ///
+  /// [onSegmentChosen] is deprecated. If you provide both [onSegmentTapped] and [onSegmentChosen],
+  /// only [onSegmentChosen] will be called until it is no longer available.
+  final ValueChanged<T>? onSegmentTapped;
 
   /// Selected text style.
   ///
@@ -304,7 +317,11 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
 
   void _onTap(T currentKey) {
     if (currentKey != widget.selectionIndex && currentKey == _pressedKey) {
-      widget.onSegmentChosen?.call(currentKey);
+      if (widget.onSegmentTapped == null) {
+        widget.onSegmentChosen?.call(currentKey);
+      } else {
+        widget.onSegmentTapped!.call(currentKey);
+      }
       _pressedKey = null;
     }
   }

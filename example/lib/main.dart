@@ -13,7 +13,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int _currentSelection = 0;
+  int? _currentSelection = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
                 borderRadius: 6.0,
                 disabledChildren: _disabledIndices,
                 verticalOffset: 8.0,
-                onSegmentChosen: (index) {
+                onSegmentTapped: (index) {
                   setState(() {
                     _currentSelection = index;
                   });

@@ -1,3 +1,16 @@
+## 4.2.0
+
+**Deprecated**
+- `onSegmentChosen` is deprecated and will be removed in later versions.
+    
+    Use **`onSegmentTapped`** instead.
+
+
+**Other**
+
+* Bump Dart SDK requirement to `>= 2.19.0`
+
+
 ## 4.1.1
 
 * Add support for setting customs `textStyle`s and a `borderWidth` for the entire widget (thanks to **@[chayanforyou](https://github.com/chayanforyou)**)

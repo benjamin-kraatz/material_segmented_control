@@ -25,7 +25,7 @@ In your `pubspec.yaml`, add
 
 ```dart
 dependencies: 
-    material_segmented_control: ^3.1.2
+    material_segmented_control: ^4.2.0
 ```
 
 
@@ -56,7 +56,7 @@ MaterialSegmentedControl(
           disabledChildren: [
             3,
           ]
-          onSegmentChosen: (index) {
+          onSegmentTapped: (index) {
             setState(() {
               _currentSelection = index;
             });
