@@ -44,22 +44,22 @@ import 'package:material_segmented_control/material_segmented_control.dart';
 int _currentSelection = 0;
 
 MaterialSegmentedControl(
-          children: _children,
-          selectionIndex: _currentSelection,
-          borderColor: Colors.grey,
-          selectedColor: Colors.redAccent,
-          unselectedColor: Colors.white,
-          selectedTextStyle: TextStyle(color: Colors.white),
-          unselectedTextStyle: TextStyle(color: Colors.redAccent),
-          borderWidth: 0.7,
-          borderRadius: 32.0,
-          disabledChildren: [3],
-          onSegmentTapped: (index) {
-            setState(() {
-              _currentSelection = index;
-            });
-          },
-         )
+    children: _children,
+    selectionIndex: _currentSelection,
+    borderColor: Colors.grey,
+    selectedColor: Colors.redAccent,
+    unselectedColor: Colors.white,
+    selectedTextStyle: TextStyle(color: Colors.white),
+    unselectedTextStyle: TextStyle(color: Colors.redAccent),
+    borderWidth: 0.7,
+    borderRadius: 32.0,
+    disabledChildren: [3],
+    onSegmentTapped: (index) {
+      setState(() {
+        _currentSelection = index;
+      });
+    },
+);
 
 Map<int, Widget> _children = {
   0: Text('Hummingbird'),
