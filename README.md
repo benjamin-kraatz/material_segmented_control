@@ -76,12 +76,3 @@ Map<int, Widget> _children = {
 
 
 You might want to check out the [example project](https://github.com/benjamin-kraatz/material_segmented_control/tree/master/example).
-
-### Documentation
-
-Open [the wiki](https://github.com/benjamin-kraatz/material_segmented_control/wiki) to see the documentation
-
-
-## Behind the scenes
-
-> **Thanks to Flutter, making this project successful!**
