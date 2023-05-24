@@ -1,6 +1,6 @@
 name: material_segmented_control
 description: A segmented control widget like the one for iOS, but in Material design.
-version: 4.2.0
+version: 5.0.0
 homepage: https://github.com/benjamin-kraatz/material_segmented_control
 documentation: https://github.com/benjamin-kraatz/material_segmented_control
 
@@ -18,8 +18,4 @@ dev_dependencies:
 
   flutter_lints: ^2.0.1
 
-# For information on the generic Dart part of this file, see the
-# following page: https://www.dartlang.org/tools/pub/pubspec
-
-# The following section is specific to Flutter.
 flutter:

@@ -1,3 +1,10 @@
+## 5.0.0
+
+- **BREAKING**: Removed `onSegmentChosen`. Use `onSegmentTapped` instead
+
+**_In later versions, this package will require `Dart SDK >=3.0.0 <4.0.0`. Consider upgrading Flutter to at least 3.10.0_**
+
+
 ## 4.2.0
 
 **Deprecated**
@@ -13,7 +20,7 @@
 
 ## 4.1.1
 
-* Add support for setting customs `textStyle`s and a `borderWidth` for the entire widget (thanks to **@[chayanforyou](https://github.com/chayanforyou)**)
+* Add support for setting custom `textStyle`s and a `borderWidth` for the entire widget (thanks to **@[chayanforyou](https://github.com/chayanforyou)**)
 
 
 ## 4.0.0

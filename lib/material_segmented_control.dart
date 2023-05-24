@@ -42,8 +42,6 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   MaterialSegmentedControl({
     Key? key,
     required this.children,
-    @Deprecated('This will be removed in later versions. Use [onSegmentTapped] instead')
-        this.onSegmentChosen,
     this.onSegmentTapped,
     this.disabledChildren,
     this.selectionIndex,
@@ -83,18 +81,7 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
   /// from [onSegmentTapped] to see the selection state.
   final T? selectionIndex;
 
-  /// The callback to use when a segmented item is chosen.
-  ///
-  /// This is deprecated: use [onSegmentTapped] instead.
-  /// If you provide both, only [onSegmentChosen] will be called.
-  @Deprecated(
-      'This will be removed in later versions. Use [onSegmentTapped] instead')
-  final ValueChanged<T>? onSegmentChosen;
-
   /// The callback to use when a segmented item is tapped
-  ///
-  /// [onSegmentChosen] is deprecated. If you provide both [onSegmentTapped] and [onSegmentChosen],
-  /// only [onSegmentChosen] will be called until it is no longer available.
   final ValueChanged<T>? onSegmentTapped;
 
   /// Selected text style.
@@ -317,11 +304,8 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
 
   void _onTap(T currentKey) {
     if (currentKey != widget.selectionIndex && currentKey == _pressedKey) {
-      if (widget.onSegmentTapped == null) {
-        widget.onSegmentChosen?.call(currentKey);
-      } else {
-        widget.onSegmentTapped!.call(currentKey);
-      }
+      widget.onSegmentTapped?.call(currentKey);
+
       _pressedKey = null;
     }
   }
