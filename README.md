@@ -12,7 +12,7 @@ A material segmented control like the one for iOS, in Material style.
 We all know well the Cupertino segmented widget in [Flutter](https://flutter.dev).
 But there is no similar in Material, so I thought, why not to create one.
 
-You can check it out on pub:
+You can check it out on pub.dev:
 ([see package on pub.dev](https://pub.dev/packages/material_segmented_control))
 
 
@@ -25,7 +25,7 @@ In your `pubspec.yaml`, add
 
 ```dart
 dependencies: 
-    material_segmented_control: ^4.2.0
+    material_segmented_control: ^5.0.0
 ```
 
 
@@ -53,9 +53,7 @@ MaterialSegmentedControl(
           unselectedTextStyle: TextStyle(color: Colors.redAccent),
           borderWidth: 0.7,
           borderRadius: 32.0,
-          disabledChildren: [
-            3,
-          ]
+          disabledChildren: [3],
           onSegmentTapped: (index) {
             setState(() {
               _currentSelection = index;
