@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 library material_segmented_control;
 
 import 'dart:math' as math;
@@ -55,7 +57,7 @@ class MaterialSegmentedControl<T> extends StatefulWidget {
     this.disabledColor = _kDisabledDefaultColor,
     this.unselectedColor = _kUnselectedDefaultColor,
     this.horizontalPadding = _horizontalPadding,
-  })  : assert(children.length >= 1),
+  })  : assert(children.isNotEmpty),
         assert(
           selectionIndex == null ||
               children.keys.any((T child) => child == selectionIndex),
@@ -316,15 +318,17 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
   }
 
   Color? getTextColor(int index, T currentKey) {
-    if (_selectionControllers[index].isAnimating)
+    if (_selectionControllers[index].isAnimating) {
       return _textColorTween.evaluate(_selectionControllers[index]);
+    }
     if (widget.selectionIndex == currentKey) return _unselectedTextColor;
     return _selectedTextColor;
   }
 
   Color? getBackgroundColor(int index, T currentKey) {
-    if (_selectionControllers[index].isAnimating)
+    if (_selectionControllers[index].isAnimating) {
       return _childTweens[index]!.evaluate(_selectionControllers[index]);
+    }
     if (widget.selectionIndex == currentKey) return _selectedColor;
     if (_pressedKey == currentKey) return _pressedColor;
     return _unselectedColor;
@@ -332,8 +336,8 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> _gestureChildren = <Widget>[];
-    final List<Color?> _backgroundColors = <Color?>[];
+    final List<Widget> gestureChildren = <Widget>[];
+    final List<Color?> backgroundColors = <Color?>[];
     int index = 0;
     int? selectedIndex;
     int? pressedIndex;
@@ -390,18 +394,18 @@ class _SegmentedControlState<T> extends State<MaterialSegmentedControl<T>>
         ),
       );
 
-      _backgroundColors.add(checkDisabledChild
+      backgroundColors.add(checkDisabledChild
           ? widget.disabledColor
           : getBackgroundColor(index, currentKey));
-      _gestureChildren.add(child);
+      gestureChildren.add(child);
       index += 1;
     }
 
     final Widget box = _SegmentedControlRenderWidget<T>(
-      children: _gestureChildren,
+      children: gestureChildren,
       selectedIndex: selectedIndex,
       pressedIndex: pressedIndex,
-      backgroundColors: _backgroundColors,
+      backgroundColors: backgroundColors,
       borderColor: _borderColor,
       borderRadius: widget.borderRadius,
       borderWidth: widget.borderWidth,
@@ -518,7 +522,7 @@ class _RenderSegmentedControl<T> extends RenderBox
     addAll(children);
   }
 
-  double _borderRadius;
+  final double _borderRadius;
   int? get selectedIndex => _selectedIndex;
   int? _selectedIndex;
   set selectedIndex(int? value) {
