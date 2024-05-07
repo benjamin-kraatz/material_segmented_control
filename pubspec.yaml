@@ -1,6 +1,6 @@
 name: material_segmented_control
 description: A segmented control widget like the one for iOS, but in Material design.
-version: 5.0.0
+version: 5.0.1
 homepage: https://github.com/benjamin-kraatz/material_segmented_control
 documentation: https://github.com/benjamin-kraatz/material_segmented_control
 

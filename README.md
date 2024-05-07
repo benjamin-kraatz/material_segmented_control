@@ -3,8 +3,7 @@
 A material segmented control like the one for iOS, in Material style.
 
 
-![image](https://github.com/benjamin-kraatz/material_segmented_control/blob/v2-0-x/images/20190624_235551.jpg "Preview")
-
+![image](images/20190624_235551.jpg "Preview")
 
 
 ## Why?
@@ -25,7 +24,7 @@ In your `pubspec.yaml`, add
 
 ```dart
 dependencies: 
-    material_segmented_control: ^5.0.0
+    material_segmented_control: ^5.0.1
 ```
 
 
